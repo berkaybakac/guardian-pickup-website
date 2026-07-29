@@ -2,7 +2,7 @@
 
 The official marketing website for Guardian Pickup, presented to customers under the VeliGeldi brand.
 
-It is a responsive, Turkish-language product website for a digital student handover system designed for preschools. The site explains the entrance-terminal workflow, presents prepaid-credit and lifetime purchase options, and routes enquiries to the company through WhatsApp.
+It is a responsive, Turkish-language product website for a digital student handover system designed for preschools, study centres, and course centres. The site explains the entrance-terminal workflow, presents prepaid-credit and lifetime purchase options, and routes enquiries to the company through WhatsApp.
 
 The project is intentionally implemented as a dependency-free static website. It can be served efficiently from a small virtual machine without a JavaScript framework, build pipeline, application server, or database.
 

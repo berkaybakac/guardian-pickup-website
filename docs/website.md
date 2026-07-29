@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The VeliGeldi website is a static marketing and lead-generation site for a preschool student handover product. It is separate from the operational entrance terminal, management application, API, and database.
+The VeliGeldi website is a static marketing and lead-generation site for a student handover product used by preschools, study centres, and course centres. It is separate from the operational entrance terminal, management application, API, and database.
 
 The website has four primary goals:
 
@@ -204,3 +204,4 @@ Developer-facing refactors must not change:
 - WhatsApp message content
 - Form behaviour
 - Layout or visual styling
+- Product claims about teacher approval, completed handover records, or offline synchronization

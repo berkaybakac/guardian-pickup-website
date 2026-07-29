@@ -142,18 +142,23 @@ const publicCopy = await Promise.all(
     .map((page) => readFile(path.join(websiteRoot, page.file), 'utf8'))
 );
 const combinedPublicCopy = publicCopy.join('\n');
-const prohibitedClaims = [
-  'Öğretmen Onayladı',
-  'Öğretmen Kontrol Eder',
-  'onay verir',
-  'onay süreci',
-  'İnternet bağlantısı kesilirse',
-  'senkronize eder'
+const prohibitedClaimPatterns = [
+  /öğretmen(?:in)?\s+(?:kontrol|onay)/iu,
+  /onay\s*(?:&|ve)\s*güvenli\s+teslim/iu,
+  /onay verir/iu,
+  /onay süreci/iu,
+  /güvenle teslim edilir/iu,
+  /yetkisiz.{0,50}teslim/iu,
+  /(?:her|tüm).{0,50}teslim.{0,50}kayıt altına/iu,
+  /internet bağlantısı kesilirse/iu,
+  /senkronize eder/iu
 ];
 
-for (const claim of prohibitedClaims) {
-  if (combinedPublicCopy.includes(claim)) {
-    reportError(`Customer-facing copy contains prohibited claim: ${claim}.`);
+for (const pattern of prohibitedClaimPatterns) {
+  if (pattern.test(combinedPublicCopy)) {
+    reportError(
+      `Customer-facing copy contains prohibited claim matching ${pattern}.`
+    );
   }
 }
 
