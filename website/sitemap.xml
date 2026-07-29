@@ -16,4 +16,8 @@
     <loc>https://veligeldi.com/iletisim</loc>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://veligeldi.com/gizlilik</loc>
+    <priority>0.3</priority>
+  </url>
 </urlset>

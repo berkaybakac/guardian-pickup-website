@@ -2,27 +2,24 @@
 
 The official marketing website for Guardian Pickup, presented to customers under the VeliGeldi brand.
 
-It is a responsive, Turkish-language product website for a digital student handover system designed for preschools. The site explains the product, presents pricing, and routes enquiries to the company through WhatsApp.
+It is a responsive, Turkish-language product website for a digital student handover system designed for preschools. The site explains the entrance-terminal workflow, presents prepaid-credit and lifetime purchase options, and routes enquiries to the company through WhatsApp.
 
 The project is intentionally implemented as a dependency-free static website. It can be served efficiently from a small virtual machine without a JavaScript framework, build pipeline, application server, or database.
 
 > Production deployment to [veligeldi.com](https://veligeldi.com) is in progress.
 
-## Preview
-
-![VeliGeldi desktop homepage](docs/screenshots/final-home.png)
-
 ## Project highlights
 
 - Responsive layouts for mobile and desktop screens
-- Semantic HTML and keyboard-accessible navigation
+- Semantic HTML, keyboard-accessible navigation, and focus-trapped enquiry dialogs
 - Reduced-motion support for users who disable animations
 - Optimized WebP images with responsive source sets
-- Self-hosted fonts and icons to reduce third-party requests
+- Shared CSS, self-hosted fonts, and a reusable SVG icon sprite
 - Clean, Turkish public routes backed by English source filenames
 - SEO metadata, Open Graph tags, JSON-LD, `robots.txt`, and XML sitemap
-- WhatsApp-based enquiry forms with native browser validation
+- WhatsApp-based enquiry forms with native browser validation and a safe POST fallback
 - No client-side tracking, database, or storage of form submissions
+- Dependency-free validation script and GitHub Actions quality checks
 
 ## Technology
 
@@ -65,6 +62,7 @@ The production web server maps stable Turkish URLs to English source files:
 | `/urun` | `website/product.html` |
 | `/fiyatlar` | `website/pricing.html` |
 | `/iletisim` | `website/contact.html` |
+| `/gizlilik` | `website/privacy.html` |
 | `/indir` | `website/download.html` |
 
 This separation keeps existing customer links unchanged while maintaining English developer-facing filenames.
@@ -73,17 +71,24 @@ This separation keeps existing customer links unchanged while maintaining Englis
 
 ```text
 .
+├── .github/
+│   └── workflows/
+│       └── site-quality.yml
 ├── README.md
 ├── docs/
-│   ├── screenshots/
 │   └── website.md
 ├── scripts/
-│   └── serve.mjs
+│   ├── serve.mjs
+│   └── validate.mjs
 └── website/
+    ├── css/
+    │   └── site.css
     ├── contact.html
     ├── download.html
+    ├── icons.svg
     ├── index.html
     ├── pricing.html
+    ├── privacy.html
     ├── product.html
     ├── fonts/
     ├── img/
@@ -109,11 +114,19 @@ To use a different port:
 PORT=3000 node scripts/serve.mjs
 ```
 
+## Validate
+
+The quality check validates page metadata, local asset references, unique element IDs, JSON-LD, form fallbacks, shared styling, and product-claim guardrails.
+
+```bash
+node scripts/validate.mjs
+```
+
 ## Quality checklist
 
 Before deployment:
 
-1. Verify all five public routes on desktop and mobile viewports.
+1. Verify all six public routes on desktop and mobile viewports.
 2. Test menu, modal, form validation, WhatsApp URL generation, and map loading.
 3. Confirm every internal link returns a successful response.
 4. Validate structured data and social metadata.
@@ -126,7 +139,7 @@ Implementation details, design constraints, routing behaviour, and deployment re
 
 ## Status
 
-The website implementation is complete. Product-claim alignment, deployment to the company-managed Ubuntu infrastructure, and production DNS configuration are the remaining release steps.
+The website implementation and product-claim alignment are complete. Deployment to the company-managed Ubuntu infrastructure and production DNS configuration are the remaining release steps.
 
 ## Maintainer
 

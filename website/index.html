@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preload" href="../fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../fonts/opensans-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../fonts/opensans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/nunito-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/opensans-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/opensans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <title>VeliGeldi | Anaokulu Öğrenci Teslim Sistemi</title>
 <meta name="description" content="VeliGeldi, anaokullarında öğrenci teslim alma sürecini güvenli, hızlı ve dijital hale getiren bir sistemdir.">
 <link rel="canonical" href="https://veligeldi.com/">
@@ -22,7 +22,9 @@
 <meta property="og:image" content="https://veligeldi.com/img/veligeldi-logo-mark.png">
 <meta property="og:image:width" content="400">
 <meta property="og:image:height" content="400">
+<meta property="og:image:alt" content="VeliGeldi logosu">
 <meta name="twitter:image" content="https://veligeldi.com/img/veligeldi-logo-mark.png">
+<meta name="twitter:image:alt" content="VeliGeldi logosu">
 <link rel="icon" type="image/svg+xml" href="logo.svg">
 <link rel="apple-touch-icon" href="img/veligeldi-logo-mark.png">
 <script type="application/ld+json">
@@ -52,1048 +54,9 @@
   "sameAs": ["https://www.instagram.com/stabilteknoloji/"]
 }
 </script>
-<style>
-/* ============================================
-   VeliGeldi Marketing Website Styles
-   ============================================ */
-
-.icon {
-  width: 1em;
-  height: 1em;
-  display: inline-block;
-  vertical-align: -0.125em;
-  fill: currentColor;
-  flex-shrink: 0;
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.bottom-bar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 199;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: var(--color-orange-dark);
-  color: #4a2e00;
-  padding: 16px 20px;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1rem;
-  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.15);
-  transition: background 0.2s ease;
-}
-.bottom-bar:hover { background: #e07f00; }
-.bottom-bar .icon { width: 1.15em; height: 1.15em; }
-
-.floating-call-wrap {
-  position: fixed;
-  bottom: 78px;
-  right: 24px;
-  z-index: 200;
-}
-.floating-call {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #2E7D32;
-  color: var(--color-white);
-  padding: 18px 28px;
-  border-radius: 999px;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1.05rem;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  animation: call-pulse 1.6s ease-in-out 3s infinite;
-}
-.floating-call::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: rgba(46, 125, 50, 0.55);
-  opacity: 0;
-  z-index: -1;
-  pointer-events: none;
-  animation: call-pulse-ring 1.6s ease-in-out 3s infinite;
-}
-.floating-call:hover {
-  background: #1B5E20;
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.3);
-  animation-play-state: paused;
-}
-.floating-call:hover::before { animation-play-state: paused; }
-.floating-call .icon { width: 1.3em; height: 1.3em; }
-.call-nudge {
-  position: absolute;
-  bottom: calc(100% + 12px);
-  right: 0;
-  background: var(--color-white);
-  color: var(--color-text);
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.82rem;
-  white-space: nowrap;
-  padding: 10px 16px;
-  border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-  opacity: 0;
-  transform: translateY(6px) scale(0.92);
-  pointer-events: none;
-  animation: nudge-pop-opacity 6s steps(1, jump-end) 3s infinite, nudge-pop-move 6s ease-in-out 3s infinite;
-}
-.call-nudge::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  right: 22px;
-  border: 7px solid transparent;
-  border-top-color: var(--color-white);
-}
-.floating-call:hover ~ .call-nudge { opacity: 0; }
-
-@keyframes nudge-pop-opacity {
-  0%, 20% { opacity: 0; }
-  20.01%, 82% { opacity: 1; }
-  82.01%, 100% { opacity: 0; }
-}
-@keyframes nudge-pop-move {
-  0%, 20% { transform: translateY(6px) scale(0.92); }
-  28%, 82% { transform: translateY(0) scale(1); }
-  92%, 100% { transform: translateY(6px) scale(0.92); }
-}
-
-@keyframes call-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
-@keyframes call-pulse-ring {
-  0% { transform: scale(1); opacity: 0.55; }
-  70%, 100% { transform: scale(1.35); opacity: 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .floating-call,
-  .floating-call::before,
-  .call-nudge,
-  .feature-icon,
-  .feature-card:hover .feature-icon::after,
-  .feature-card:hover .feature-icon .icon,
-  .step-card:hover .step-icon .icon { animation: none; }
-}
-
-@media (max-width: 560px) {
-  .bottom-bar { padding: 13px 16px; font-size: 0.9rem; }
-  .floating-call-wrap { bottom: 66px; right: 16px; }
-  .floating-call { padding: 15px 22px; font-size: 0.98rem; }
-  .floating-call .icon { width: 1.4em; height: 1.4em; }
-}
-
-@font-face {
-  font-family: 'Nunito';
-  font-style: normal;
-  font-weight: 400 800;
-  font-display: swap;
-  src: url('../fonts/nunito-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Nunito';
-  font-style: normal;
-  font-weight: 400 800;
-  font-display: swap;
-  src: url('../fonts/nunito-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400 600;
-  font-display: swap;
-  src: url('../fonts/opensans-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400 600;
-  font-display: swap;
-  src: url('../fonts/opensans-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-:root {
-  --color-yellow: #FFD700;
-  --color-yellow-dark: #F9A825;
-  --color-green: #66BB6A;
-  --color-green-dark: #4CAF50;
-  --color-blue: #42A5F5;
-  --color-blue-dark: #1E88E5;
-  --color-orange: #FF9800;
-  --color-orange-dark: #FB8C00;
-  --color-orange-text: #8A4300;
-  --color-green-text: #1E6B28;
-  --color-white: #FFFFFF;
-  --color-bg-light: #F5F5F5;
-  --color-text: #37474F;
-  --color-text-muted: #6b7780;
-
-  --font-heading: 'Nunito', sans-serif;
-  --font-body: 'Open Sans', sans-serif;
-
-  --radius-sm: 10px;
-  --radius-md: 18px;
-  --radius-lg: 28px;
-
-  --shadow-soft: 0 8px 24px rgba(55, 71, 79, 0.08);
-  --shadow-hover: 0 14px 32px rgba(55, 71, 79, 0.14);
-
-  --container-width: 1140px;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: var(--font-body);
-  color: var(--color-text);
-  background: var(--color-white);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-img, svg { max-width: 100%; display: block; }
-
-a { text-decoration: none; color: inherit; }
-
-ul { list-style: none; }
-
-.container {
-  width: 100%;
-  max-width: var(--container-width);
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-h1, h2, h3, h4 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  line-height: 1.25;
-  color: var(--color-text);
-}
-
-h1 { font-size: clamp(2rem, 4vw, 3rem); }
-h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); }
-h3 { font-size: clamp(1.3rem, 2.4vw, 1.6rem); }
-h4 { font-size: 1.2rem; font-weight: 600; }
-
-p { color: var(--color-text-muted); }
-
-section { padding: 80px 0; }
-main > section:not(:first-child) { content-visibility: auto; contain-intrinsic-size: auto 700px; }
-
-.section-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
-.section-head .eyebrow {
-  display: inline-block;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-orange-text);
-  background: #FFF3E0;
-  padding: 6px 16px;
-  border-radius: 999px;
-  margin-bottom: 16px;
-}
-.section-head h2 { margin-bottom: 12px; }
-
-/* ============ Buttons ============ */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 30px;
-  border-radius: 999px;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1rem;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  white-space: nowrap;
-}
-.btn:hover { transform: translateY(-2px); }
-.btn-primary {
-  background: var(--color-yellow-dark);
-  color: #4a2e00;
-  box-shadow: 0 8px 20px rgba(249, 168, 37, 0.35);
-}
-.btn-primary:hover { background: #f7bb2f; box-shadow: 0 12px 26px rgba(249, 168, 37, 0.45); }
-.btn-secondary {
-  background: var(--color-white);
-  color: var(--color-text);
-  border: 2px solid rgba(55, 71, 79, 0.15);
-}
-.btn-secondary:hover { border-color: var(--color-yellow-dark); }
-.btn-block { width: 100%; justify-content: center; }
-
-/* ============ Header ============ */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.98);
-  border-bottom: 1px solid rgba(55, 71, 79, 0.08);
-}
-.site-header .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 76px;
-}
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 1.4rem;
-  color: var(--color-text);
-}
-.logo .logo-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 84px;
-  height: 84px;
-}
-.logo .logo-badge img { width: 100%; height: 100%; object-fit: contain; }
-.logo .logo-sub { color: var(--color-orange-text); }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.nav-links a {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 0.98rem;
-  padding: 10px 16px;
-  border-radius: 999px;
-  color: var(--color-text);
-  transition: background 0.2s ease, color 0.2s ease;
-}
-.nav-links a:hover { background: var(--color-bg-light); }
-.nav-links a.active { background: var(--color-yellow); color: #4a2e00; }
-
-.nav-cta { display: flex; align-items: center; gap: 12px; }
-
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-}
-.menu-toggle span {
-  width: 26px;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--color-text);
-  transition: transform 0.25s ease, opacity 0.25s ease;
-}
-.menu-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-.menu-toggle.open span:nth-child(2) { opacity: 0; }
-.menu-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-/* ============ Hero ============ */
-.hero {
-  position: relative;
-  background: var(--color-yellow-dark);
-  overflow: hidden;
-  padding: 96px 0 120px;
-}
-.hero .container {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 48px;
-  align-items: center;
-}
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.55);
-  padding: 8px 18px;
-  border-radius: 999px;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.85rem;
-  color: #6b3e00;
-  margin-bottom: 20px;
-}
-.hero h1 { color: #40260a; margin-bottom: 18px; }
-.hero p.lead { color: #5c3d16; font-size: 1.1rem; max-width: 480px; margin-bottom: 32px; }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 36px; }
-.hero-trust { display: flex; flex-wrap: wrap; gap: 22px; }
-.hero-trust span {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.92rem;
-  color: #5c3d16;
-}
-
-.hero-art {
-  position: relative;
-  background: rgba(255, 255, 255, 0.55);
-  border-radius: var(--radius-lg);
-  padding: 32px;
-  box-shadow: var(--shadow-soft);
-}
-.hero-art .device-card {
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  padding: 24px;
-  box-shadow: var(--shadow-hover);
-}
-.hero-art .device-card .dot-row { display: flex; gap: 6px; margin-bottom: 16px; }
-.hero-art .device-card .dot { width: 10px; height: 10px; border-radius: 50%; }
-.dot.d1 { background: var(--color-orange); }
-.dot.d2 { background: var(--color-yellow-dark); }
-.dot.d3 { background: var(--color-green-dark); }
-.hero-art .avatar-row { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
-.hero-art .avatar {
-  width: 54px; height: 54px; border-radius: 50%;
-  background: var(--color-blue-dark);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--color-white); font-size: 1.4rem;
-}
-.hero-art .avatar-info strong { display: block; font-family: var(--font-heading); }
-.hero-art .avatar-info small { color: var(--color-text-muted); }
-.hero-art .status-pill {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: #E8F5E9; color: var(--color-green-text);
-  font-family: var(--font-heading); font-weight: 700; font-size: 0.9rem;
-  padding: 10px 16px; border-radius: 999px;
-}
-
-/* ============ Feature Cards ============ */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-}
-.feature-card {
-  background: var(--color-white);
-  border: 1px solid rgba(55, 71, 79, 0.08);
-  border-radius: var(--radius-md);
-  padding: 34px 28px;
-  box-shadow: var(--shadow-soft);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
-.feature-icon {
-  position: relative;
-  width: 64px; height: 64px;
-  border-radius: 20px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.6rem;
-  margin-bottom: 20px;
-  color: var(--color-white);
-  animation: icon-float 3.6s ease-in-out 3s infinite;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
-}
-.feature-card:nth-child(2) .feature-icon { animation-delay: 3.6s; }
-.feature-card:nth-child(3) .feature-icon { animation-delay: 4.2s; }
-.feature-card:nth-child(4) .feature-icon { animation-delay: 4.8s; }
-.feature-icon::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-}
-.feature-icon.icon-yellow { background: linear-gradient(135deg, #FFD54F, #F9A825); color: #4a2e00; --icon-glow: rgba(249, 168, 37, 0.5); box-shadow: 0 8px 18px rgba(249, 168, 37, 0.35); }
-.feature-icon.icon-green { background: linear-gradient(135deg, #81C784, #43A047); --icon-glow: rgba(76, 175, 80, 0.5); box-shadow: 0 8px 18px rgba(76, 175, 80, 0.35); }
-.feature-icon.icon-blue { background: linear-gradient(135deg, #64B5F6, #1E88E5); --icon-glow: rgba(30, 136, 229, 0.5); box-shadow: 0 8px 18px rgba(30, 136, 229, 0.35); }
-.feature-icon.icon-orange { background: linear-gradient(135deg, #FFB74D, #FB8C00); --icon-glow: rgba(251, 140, 0, 0.5); box-shadow: 0 8px 18px rgba(251, 140, 0, 0.35); }
-.feature-card:hover .feature-icon {
-  animation-play-state: paused;
-  filter: brightness(1.06) saturate(1.1);
-}
-.feature-card:hover .feature-icon::after { animation: icon-ring 1s ease-out infinite; }
-.feature-card:hover .feature-icon .icon { animation: icon-wiggle 0.65s ease; }
-.feature-card h3 { margin-bottom: 10px; }
-
-@keyframes icon-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-7px); }
-}
-@keyframes icon-ring {
-  from { box-shadow: 0 0 0 0 var(--icon-glow, rgba(249, 168, 37, 0.5)); }
-  to { box-shadow: 0 0 0 16px rgba(0, 0, 0, 0); }
-}
-@keyframes icon-wiggle {
-  0%, 100% { transform: rotate(0) scale(1); }
-  25% { transform: rotate(-12deg) scale(1.18); }
-  55% { transform: rotate(10deg) scale(1.1); }
-  80% { transform: rotate(-4deg) scale(1.04); }
-}
-
-/* Scroll reveal (added by JavaScript) */
-.anim-ready .reveal {
-  opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.anim-ready .reveal.in-view { opacity: 1; transform: none; }
-
-.bg-light { background: var(--color-bg-light); }
-
-/* ============ How it works ============ */
-.steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  position: relative;
-}
-.step-card {
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  padding: 30px 22px;
-  text-align: center;
-  box-shadow: var(--shadow-soft);
-  position: relative;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.step-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
-.step-number {
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: var(--color-yellow);
-  color: #4a2e00;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-heading); font-weight: 800;
-  margin: 0 auto 16px;
-  transition: transform 0.25s ease, background 0.25s ease;
-}
-.step-card:hover .step-number { transform: scale(1.12); background: var(--color-yellow-dark); }
-.step-card .step-icon {
-  width: 62px; height: 62px;
-  margin: 0 auto 14px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.5rem;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
-}
-.step-card:nth-child(4n+1) .step-icon { background: linear-gradient(135deg, #FFF3E0, #FFD8A8); color: #E65100; }
-.step-card:nth-child(4n+2) .step-icon { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); color: #1565C0; }
-.step-card:nth-child(4n+3) .step-icon { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); color: #2E7D32; }
-.step-card:nth-child(4n) .step-icon { background: linear-gradient(135deg, #FFF8E1, #FFECB3); color: #B26A00; }
-.step-card:hover .step-icon {
-  transform: scale(1.15) rotate(6deg);
-  box-shadow: 0 10px 20px rgba(55, 71, 79, 0.15);
-}
-.step-card:hover .step-icon .icon { animation: icon-wiggle 0.65s ease; }
-.step-card h3 { margin-bottom: 8px; font-size: 1.2rem; font-weight: 600; }
-.step-card p { font-size: 0.92rem; }
-
-/* ============ CTA Band ============ */
-.cta-band {
-  background: #2E7D32;
-  border-radius: var(--radius-lg);
-  padding: 56px 40px;
-  text-align: center;
-  color: var(--color-white);
-  margin: 0 24px;
-  max-width: calc(var(--container-width) - 48px);
-  margin-inline: auto;
-}
-.cta-band h2 { color: var(--color-white); margin-bottom: 12px; }
-.cta-band p { color: var(--color-white); margin-bottom: 28px; }
-.cta-band .btn-primary { background: var(--color-white); color: var(--color-green-text); box-shadow: none; }
-.cta-band .btn-primary:hover { background: #f3fff3; }
-
-/* ============ Scenario Cards (product.html) ============ */
-.scenario-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-.scenario-card {
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  padding: 28px;
-  border-top: 4px solid var(--color-yellow-dark);
-  box-shadow: var(--shadow-soft);
-}
-.scenario-card.blue { border-top-color: var(--color-blue-dark); }
-.scenario-card.green { border-top-color: var(--color-green-dark); }
-.scenario-card .scenario-role {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--font-heading); font-weight: 700; font-size: 0.9rem;
-  color: var(--color-text-muted); margin-bottom: 14px;
-}
-.scenario-card ul { display: flex; flex-direction: column; gap: 10px; }
-.scenario-card h3 { font-size: 1.2rem; font-weight: 600; }
-.scenario-card li { display: flex; gap: 10px; font-size: 0.95rem; align-items: flex-start; }
-.scenario-card li i { color: var(--color-green-text); margin-top: 3px; }
-
-/* ============ Pricing (pricing.html) ============ */
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-  align-items: stretch;
-}
-.pricing-grid.cols-2 {
-  grid-template-columns: repeat(2, 1fr);
-  max-width: 800px;
-  margin: 0 auto;
-}
-.price-card {
-  background: var(--color-white);
-  border: 1px solid rgba(55,71,79,0.1);
-  border-radius: var(--radius-lg);
-  padding: 36px 30px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--shadow-soft);
-  position: relative;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.price-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
-.price-card.featured {
-  border: 2px solid var(--color-yellow-dark);
-  transform: scale(1.03);
-}
-.price-card.featured:hover { transform: scale(1.03) translateY(-6px); }
-.price-badge {
-  position: absolute; top: -14px; right: 28px;
-  background: var(--color-yellow-dark); color: #4a2e00;
-  font-family: var(--font-heading); font-weight: 700; font-size: 0.8rem;
-  padding: 6px 16px; border-radius: 999px;
-}
-.product-visual {
-  width: 100%;
-  height: 140px;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 22px;
-  font-size: 3rem;
-  color: var(--color-white);
-}
-.product-visual.visual-orange { background: var(--color-orange-dark); }
-.product-visual.visual-blue { background: var(--color-blue-dark); }
-.product-visual.visual-green { background: var(--color-green-dark); }
-
-.price-card .plan-name { font-family: var(--font-heading); font-weight: 700; color: var(--color-orange-text); margin-bottom: 6px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.04em; }
-.price-card h3 { margin-bottom: 6px; }
-.price-card .plan-desc { font-size: 0.92rem; margin-bottom: 22px; }
-.price-card .plan-features { flex: 1; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
-.price-card .plan-features li { display: flex; gap: 10px; font-size: 0.95rem; align-items: flex-start; }
-.price-card .plan-features li i.fa-check { color: var(--color-green-text); margin-top: 3px; }
-.price-card .plan-features li.muted { color: #b0b8bc; }
-.price-card .plan-features li.muted i { color: #cfd6d9; }
-
-.faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
-.faq-item {
-  background: var(--color-white);
-  border: 1px solid rgba(55,71,79,0.1);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-}
-.faq-item summary {
-  padding: 18px 22px;
-  cursor: pointer;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  list-style: none;
-}
-.faq-item summary::-webkit-details-marker { display: none; }
-.faq-item summary::after { content: "+"; font-size: 1.4rem; color: var(--color-orange-text); }
-.faq-item[open] summary::after { content: "\2212"; }
-.faq-item p { padding: 0 22px 20px; }
-
-/* ============ Contact (contact.html) ============ */
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 0.85fr;
-  gap: 40px;
-  align-items: start;
-}
-.contact-form-card {
-  background: var(--color-white);
-  border-radius: var(--radius-lg);
-  padding: 40px;
-  box-shadow: var(--shadow-soft);
-}
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
-.form-group { margin-bottom: 18px; display: flex; flex-direction: column; gap: 8px; }
-.form-group label { font-family: var(--font-heading); font-weight: 700; font-size: 0.92rem; }
-.form-group input,
-.form-group textarea {
-  border: 1.5px solid rgba(55,71,79,0.18);
-  border-radius: var(--radius-sm);
-  padding: 13px 16px;
-  font-family: var(--font-body);
-  font-size: 0.98rem;
-  color: var(--color-text);
-  transition: border-color 0.2s ease;
-  width: 100%;
-}
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--color-yellow-dark);
-}
-.form-group textarea { resize: vertical; min-height: 130px; }
-.form-note { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 14px; }
-.form-success {
-  display: none;
-  align-items: center;
-  gap: 12px;
-  background: #E8F5E9;
-  color: var(--color-green-text);
-  border-radius: var(--radius-sm);
-  padding: 16px 20px;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-.form-success.show { display: flex; }
-
-.info-card {
-  background: var(--color-white);
-  border-radius: var(--radius-lg);
-  padding: 32px;
-  box-shadow: var(--shadow-soft);
-  margin-bottom: 24px;
-}
-.info-item { display: flex; gap: 16px; margin-bottom: 22px; }
-.info-item:last-child { margin-bottom: 0; }
-.info-item .info-icon {
-  width: 46px; height: 46px; border-radius: 12px;
-  background: var(--color-bg-light);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--color-orange-text);
-  flex-shrink: 0;
-}
-.info-item strong { display: block; font-family: var(--font-heading); margin-bottom: 4px; }
-.info-item p { font-size: 0.92rem; margin: 0; }
-.map-embed {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-soft);
-  line-height: 0;
-}
-.map-embed iframe { width: 100%; height: 280px; border: 0; display: block; }
-
-.quick-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 28px;
-}
-.btn-call {
-  background: #0d5aa7;
-  color: var(--color-white);
-  box-shadow: 0 8px 20px rgba(30, 136, 229, 0.35);
-}
-.btn-call:hover { background: #1a78ce; }
-.btn-whatsapp {
-  background: #075E54;
-  color: var(--color-white);
-  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
-}
-.btn-whatsapp:hover { background: #128C7E; }
-
-/* ============ Footer ============ */
-.site-footer {
-  background: #2b363c;
-  color: #cfd8dc;
-  padding: 60px 0 170px;
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
-  gap: 36px;
-  margin-bottom: 40px;
-}
-.footer-brand .logo { color: var(--color-white); margin-bottom: 14px; }
-.footer-brand p { color: #9aa7ac; font-size: 0.92rem; max-width: 280px; }
-.footer-col h3 { color: var(--color-white); margin-bottom: 16px; font-size: 1.05rem; font-weight: 600; }
-.footer-col ul { display: flex; flex-direction: column; gap: 10px; }
-.footer-col a { color: #cfd8dc; font-size: 0.94rem; transition: color 0.2s ease; }
-.footer-col a:hover { color: var(--color-yellow); }
-.footer-col .info-line { display: flex; gap: 10px; align-items: flex-start; color: #cfd8dc; font-size: 0.94rem; margin-bottom: 10px; }
-.footer-col .info-line i { color: var(--color-yellow); margin-top: 3px; }
-.social-row { display: flex; gap: 10px; margin-top: 16px; }
-.social-row a {
-  width: 38px; height: 38px; border-radius: 50%;
-  background: rgba(255,255,255,0.08);
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s ease;
-}
-.social-row a:hover { background: var(--color-yellow-dark); color: #4a2e00; }
-.footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.08);
-  padding-top: 22px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-  font-size: 0.85rem;
-  color: #8fa0a6;
-}
-
-/* ============ Page Hero (subpages) ============ */
-.page-hero {
-  background: #FFEFDC;
-  padding: 64px 0 60px;
-  text-align: center;
-}
-.page-hero .eyebrow {
-  display: inline-block;
-  font-family: var(--font-heading); font-weight: 700; font-size: 0.85rem;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--color-orange-text);
-  background: rgba(255,255,255,0.7);
-  padding: 6px 16px; border-radius: 999px; margin-bottom: 16px;
-}
-.page-hero p { max-width: 620px; margin: 14px auto 0; color: var(--color-text); }
-
-/* ============ Responsive ============ */
-@media (max-width: 960px) {
-  .hero .container { grid-template-columns: 1fr; }
-  .hero-art { max-width: 480px; }
-  .features-grid { grid-template-columns: repeat(2, 1fr); }
-  .steps { grid-template-columns: repeat(2, 1fr); }
-  .scenario-grid { grid-template-columns: 1fr; }
-  .pricing-grid, .pricing-grid.cols-2 { grid-template-columns: 1fr; max-width: none; }
-  .price-card.featured { transform: none; }
-  .price-card.featured:hover { transform: translateY(-6px); }
-  .contact-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-}
-
-@media (max-width: 768px) {
-  .nav-links, .nav-cta .btn-secondary { display: none; }
-  .menu-toggle { display: flex; }
-  .site-header.nav-open .nav-links {
-    display: flex;
-    position: absolute;
-    top: 76px; left: 0; right: 0;
-    background: var(--color-white);
-    flex-direction: column;
-    padding: 16px 24px 24px;
-    box-shadow: var(--shadow-soft);
-  }
-  .site-header.nav-open .nav-links a { width: 100%; padding: 14px 16px; }
-  section { padding: 72px 0; }
-  .cta-band { padding: 40px 24px; }
-  .form-row { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-  .footer-bottom { flex-direction: column; text-align: center; }
-  .steps { gap: 28px; }
-  .scenario-grid { gap: 28px; }
-  .feature-card { padding: 36px 26px; }
-  .step-card { padding: 34px 24px; }
-  .price-card { padding: 38px 26px; }
-  .scenario-card { padding: 30px; }
-  .hero-actions { gap: 16px; }
-  .quick-actions { gap: 16px; }
-  .btn { padding: 16px 30px; }
-}
-
-@media (max-width: 560px) {
-  .features-grid { grid-template-columns: 1fr; }
-  .steps { grid-template-columns: 1fr; }
-  .hero-trust { gap: 18px; }
-  .site-footer { padding-bottom: 130px; }
-}
-
-/* ============ Preschool-Themed Icon Details ============ */
-.feature-icon {
-  border-radius: 42% 58% 54% 46% / 48% 44% 58% 52%;
-  border: 3px solid rgba(255, 255, 255, 0.9);
-}
-.feature-card:nth-child(1) .feature-icon { --tilt: -3deg; }
-.feature-card:nth-child(2) .feature-icon { --tilt: 2.5deg; }
-.feature-card:nth-child(3) .feature-icon { --tilt: -2deg; }
-.feature-card:nth-child(4) .feature-icon { --tilt: 3deg; }
-@keyframes icon-float {
-  0%, 100% { transform: translateY(0) rotate(var(--tilt, 0deg)); }
-  50% { transform: translateY(-7px) rotate(var(--tilt, 0deg)); }
-}
-.feature-icon::before {
-  content: "\2726";
-  position: absolute;
-  top: -13px; right: -11px;
-  font-size: 0.9rem;
-  line-height: 1;
-  color: var(--color-yellow-dark);
-  animation: sparkle-twinkle 2.4s ease-in-out 3s infinite;
-}
-.feature-card:nth-child(2) .feature-icon::before { color: var(--color-green-dark); animation-delay: 3.5s; }
-.feature-card:nth-child(3) .feature-icon::before { color: var(--color-blue-dark); animation-delay: 4s; }
-.feature-card:nth-child(4) .feature-icon::before { color: var(--color-orange-dark); animation-delay: 4.5s; }
-@keyframes sparkle-twinkle {
-  0%, 100% { opacity: 0.3; transform: scale(0.75) rotate(0deg); }
-  50% { opacity: 1; transform: scale(1.2) rotate(25deg); }
-}
-.step-card .step-icon {
-  border-radius: 46% 54% 52% 48% / 52% 46% 54% 48%;
-  border: 2px dashed rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 10px rgba(55, 71, 79, 0.08);
-}
-.step-number {
-  border: 2px solid var(--color-white);
-  box-shadow: 0 3px 8px rgba(249, 168, 37, 0.4);
-}
-.logo .logo-badge { transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
-.logo:hover .logo-badge { transform: rotate(-10deg) scale(1.1); }
-.doodles { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
-.doodle {
-  position: absolute;
-  opacity: 0.55;
-  animation: icon-float 5s ease-in-out 3s infinite;
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
-}
-.doodle.doodle-1 { top: 10%; left: 4%; font-size: 2.4rem; --tilt: -10deg; }
-.doodle.doodle-2 { top: 14%; right: 6%; font-size: 2.6rem; --tilt: 8deg; animation-delay: 3.8s; }
-.doodle.doodle-3 { bottom: 12%; left: 7%; font-size: 2.1rem; --tilt: -6deg; animation-delay: 4.6s; }
-.doodle.doodle-4 { bottom: 16%; right: 8%; font-size: 2.3rem; --tilt: 10deg; animation-delay: 5.4s; }
-.hero .container, .page-hero .container { position: relative; z-index: 2; }
-.wave-divider { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 70px; line-height: 0; pointer-events: none; z-index: 1; }
-.wave-divider svg { width: 100%; height: 100%; display: block; }
-.section-head .eyebrow, .page-hero .eyebrow {
-  border: 2px dashed rgba(138, 67, 0, 0.35);
-  transform: rotate(-2deg);
-}
-.section-head h2 { position: relative; padding-bottom: 16px; }
-.section-head h2::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 84px;
-  height: 12px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 16'%3E%3Cpath d='M4 10 Q 20 2 36 10 T 68 10 T 100 10 T 132 10' stroke='%23F9A825' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-.btn-primary { box-shadow: 0 5px 0 #C87800, 0 10px 20px rgba(249, 168, 37, 0.3); }
-.btn-primary:hover { box-shadow: 0 5px 0 #C87800, 0 12px 24px rgba(249, 168, 37, 0.4); }
-.btn-primary:active { transform: translateY(3px); box-shadow: 0 1px 0 #C87800, 0 4px 10px rgba(249, 168, 37, 0.3); }
-.cta-band .btn-primary:active { box-shadow: none; transform: translateY(-1px); }
-.btn-call { box-shadow: 0 5px 0 #0d5aa7, 0 10px 20px rgba(30, 136, 229, 0.3); }
-.btn-call:hover { box-shadow: 0 5px 0 #0d5aa7, 0 12px 24px rgba(30, 136, 229, 0.4); }
-.btn-call:active { transform: translateY(3px); box-shadow: 0 1px 0 #0d5aa7, 0 4px 10px rgba(30, 136, 229, 0.3); }
-.btn-whatsapp { box-shadow: 0 5px 0 #17984a, 0 10px 20px rgba(37, 211, 102, 0.3); }
-.btn-whatsapp:hover { box-shadow: 0 5px 0 #17984a, 0 12px 24px rgba(37, 211, 102, 0.4); }
-.btn-whatsapp:active { transform: translateY(3px); box-shadow: 0 1px 0 #17984a, 0 4px 10px rgba(37, 211, 102, 0.3); }
-.bg-light {
-  background-image: radial-gradient(rgba(55, 71, 79, 0.06) 2px, transparent 2.5px);
-  background-size: 22px 22px;
-}
-@media (prefers-reduced-motion: reduce) {
-  .feature-icon::before, .doodle, .price-card:hover .product-visual .icon { animation: none; }
-}
-@media (max-width: 768px) {
-  .doodles { display: none; }
-}
-
-/* ============ Price Quote Modal ============ */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(30, 34, 37, 0.55);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  z-index: 500;
-}
-.modal-overlay.open { display: flex; }
-.modal-card {
-  position: relative;
-  background: var(--color-white);
-  border-radius: var(--radius-lg);
-  padding: 40px;
-  max-width: 560px;
-  width: 100%;
-  max-height: 88vh;
-  overflow-y: auto;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
-  animation: modal-pop 0.25s ease;
-}
-@keyframes modal-pop {
-  from { opacity: 0; transform: scale(0.94) translateY(10px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-.modal-close {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--color-bg-light);
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  line-height: 1;
-  color: var(--color-text);
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-.modal-close:hover { background: #e3e7e9; transform: rotate(90deg); }
-@media (prefers-reduced-motion: reduce) {
-  .modal-card { animation: none; }
-}
-@media (max-width: 560px) {
-  .modal-card { padding: 28px 22px; }
-}
-
-</style>
+<link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
-<svg style="display:none" aria-hidden="true"><symbol id="i-bell" viewBox="0 0 448 512"><path d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></symbol><symbol id="i-bolt" viewBox="0 0 448 512"><path d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288H175.5L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H272.5L349.4 44.6z"/></symbol><symbol id="i-chalkboard-user" viewBox="0 0 640 512"><path d="M160 64c0-35.3 28.7-64 64-64H576c35.3 0 64 28.7 64 64V352c0 35.3-28.7 64-64 64H336.8c-11.8-25.5-29.9-47.5-52.4-64H384V320c0-17.7 14.3-32 32-32h64c17.7 0 32 14.3 32 32v32h64V64L224 64v49.1C205.2 102.2 183.3 96 160 96V64zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM133.3 352h53.3C260.3 352 320 411.7 320 485.3c0 14.7-11.9 26.7-26.7 26.7H26.7C11.9 512 0 500.1 0 485.3C0 411.7 59.7 352 133.3 352z"/></symbol><symbol id="i-child-reaching" viewBox="0 0 384 512"><path d="M256 64A64 64 0 1 0 128 64a64 64 0 1 0 128 0zM152.9 169.3c-23.7-8.4-44.5-24.3-58.8-45.8L74.6 94.2C64.8 79.5 45 75.6 30.2 85.4s-18.7 29.7-8.9 44.4L40.9 159c18.1 27.1 42.8 48.4 71.1 62.4V480c0 17.7 14.3 32 32 32s32-14.3 32-32V384h32v96c0 17.7 14.3 32 32 32s32-14.3 32-32V221.6c29.1-14.2 54.4-36.2 72.7-64.2l18.2-27.9c9.6-14.8 5.4-34.6-9.4-44.3s-34.6-5.5-44.3 9.4L291 122.4c-21.8 33.4-58.9 53.6-98.8 53.6c-12.6 0-24.9-2-36.6-5.8c-.9-.3-1.8-.7-2.7-.9z"/></symbol><symbol id="i-circle-check" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></symbol><symbol id="i-circle-info" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></symbol><symbol id="i-door-open" viewBox="0 0 576 512"><path d="M320 32c0-9.9-4.5-19.2-12.3-25.2S289.8-1.4 280.2 1l-179.9 45C79 51.3 64 70.5 64 92.5V448H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H96 288h32V480 32zM256 256c0 17.7-10.7 32-24 32s-24-14.3-24-32s10.7-32 24-32s24 14.3 24 32zm96-128h96V480c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H512V128c0-35.3-28.7-64-64-64H352v64z"/></symbol><symbol id="i-envelope" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></symbol><symbol id="i-hand-pointer" viewBox="0 0 448 512"><path d="M128 40c0-22.1 17.9-40 40-40s40 17.9 40 40V188.2c8.5-7.6 19.7-12.2 32-12.2c20.6 0 38.2 13 45 31.2c8.8-9.3 21.2-15.2 35-15.2c25.3 0 46 19.5 47.9 44.3c8.5-7.7 19.8-12.3 32.1-12.3c26.5 0 48 21.5 48 48v48 16 48c0 70.7-57.3 128-128 128l-16 0H240l-.1 0h-5.2c-5 0-9.9-.3-14.7-1c-55.3-5.6-106.2-34-140-79L8 336c-13.3-17.7-9.7-42.7 8-56s42.7-9.7 56 8l56 74.7V40zM240 304c0-8.8-7.2-16-16-16s-16 7.2-16 16v96c0 8.8 7.2 16 16 16s16-7.2 16-16V304zm48-16c-8.8 0-16 7.2-16 16v96c0 8.8 7.2 16 16 16s16-7.2 16-16V304c0-8.8-7.2-16-16-16zm80 16c0-8.8-7.2-16-16-16s-16 7.2-16 16v96c0 8.8 7.2 16 16 16s16-7.2 16-16V304z"/></symbol><symbol id="i-instagram" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></symbol><symbol id="i-keyboard" viewBox="0 0 576 512"><path d="M64 64C28.7 64 0 92.7 0 128V384c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H64zm16 64h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V144c0-8.8 7.2-16 16-16zM64 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V240zm16 80h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V336c0-8.8 7.2-16 16-16zm80-176c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V144zm16 80h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V240c0-8.8 7.2-16 16-16zM160 336c0-8.8 7.2-16 16-16H400c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V336zM272 128h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V144c0-8.8 7.2-16 16-16zM256 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V240zM368 128h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H368c-8.8 0-16-7.2-16-16V144c0-8.8 7.2-16 16-16zM352 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H368c-8.8 0-16-7.2-16-16V240zM464 128h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H464c-8.8 0-16-7.2-16-16V144c0-8.8 7.2-16 16-16zM448 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H464c-8.8 0-16-7.2-16-16V240zm16 80h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H464c-8.8 0-16-7.2-16-16V336c0-8.8 7.2-16 16-16z"/></symbol><symbol id="i-location-dot" viewBox="0 0 384 512"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></symbol><symbol id="i-lock" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></symbol><symbol id="i-mobile-screen" viewBox="0 0 384 512"><path d="M16 64C16 28.7 44.7 0 80 0H304c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H80c-35.3 0-64-28.7-64-64V64zM144 448c0 8.8 7.2 16 16 16h64c8.8 0 16-7.2 16-16s-7.2-16-16-16H160c-8.8 0-16 7.2-16 16zM304 64H80V384H304V64z"/></symbol><symbol id="i-phone" viewBox="0 0 512 512"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></symbol><symbol id="i-shield-halved" viewBox="0 0 512 512"><path d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0zm0 66.8V444.8C394 378 431.1 230.1 432 141.4L256 66.8l0 0z"/></symbol><symbol id="i-shield-heart" viewBox="0 0 512 512"><path d="M269.4 2.9C265.2 1 260.7 0 256 0s-9.2 1-13.4 2.9L54.3 82.8c-22 9.3-38.4 31-38.3 57.2c.5 99.2 41.3 280.7 213.6 363.2c16.7 8 36.1 8 52.8 0C454.7 420.7 495.5 239.2 496 140c.1-26.2-16.3-47.9-38.3-57.2L269.4 2.9zM144 221.3c0-33.8 27.4-61.3 61.3-61.3c16.2 0 31.8 6.5 43.3 17.9l7.4 7.4 7.4-7.4c11.5-11.5 27.1-17.9 43.3-17.9c33.8 0 61.3 27.4 61.3 61.3c0 16.2-6.5 31.8-17.9 43.3l-82.7 82.7c-6.2 6.2-16.4 6.2-22.6 0l-82.7-82.7c-11.5-11.5-17.9-27.1-17.9-43.3z"/></symbol><symbol id="i-tags" viewBox="0 0 512 512"><path d="M345 39.1L472.8 168.4c52.4 53 52.4 138.2 0 191.2L360.8 472.9c-9.3 9.4-24.5 9.5-33.9 .2s-9.5-24.5-.2-33.9L438.6 325.9c33.9-34.3 33.9-89.4 0-123.7L310.9 72.9c-9.3-9.4-9.2-24.6 .2-33.9s24.6-9.2 33.9 .2zM0 229.5V80C0 53.5 21.5 32 48 32H197.5c17 0 33.3 6.7 45.3 18.7l168 168c25 25 25 65.5 0 90.5L277.3 442.7c-25 25-65.5 25-90.5 0l-168-168C6.7 262.7 0 246.5 0 229.5zM144 144a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></symbol><symbol id="i-user" viewBox="0 0 448 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></symbol><symbol id="i-whatsapp" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></symbol></svg>
 
 <header class="site-header">
   <div class="container">
@@ -1101,15 +64,15 @@ main > section:not(:first-child) { content-visibility: auto; contain-intrinsic-s
       <span class="logo-badge"><img src="/logo.svg" alt="" width="84" height="84"></span>
       VeliGeldi<span class="logo-sub"></span>
     </a>
-    <nav class="nav-links">
+    <nav class="nav-links" id="primary-navigation" aria-label="Ana menü">
       <a href="/" class="active">Ana Sayfa</a>
       <a href="/urun">Ürün Hakkında</a>
-      <a href="/fiyatlar">Ürünler</a>
+      <a href="/fiyatlar">Paketler &amp; Fiyat</a>
       <a href="/iletisim">İletişim</a>
     </nav>
     <div class="nav-cta">
       <a href="/iletisim" class="btn btn-secondary">Fiyat Al</a>
-      <button class="menu-toggle" aria-label="Menüyü aç/kapat" aria-expanded="false">
+      <button class="menu-toggle" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="primary-navigation">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -1127,30 +90,30 @@ main > section:not(:first-child) { content-visibility: auto; contain-intrinsic-s
   </div>
   <div class="container">
     <div class="hero-copy">
-      <span class="hero-badge"><i class="fa-solid fa-shield-heart"><svg class="icon"><use href="#i-shield-heart"></use></svg></i></span>
-      <h1>Güvenli ve Hızlı<br>Öğrenci Teslim Sistemi</h1>
-      <p class="lead">VeliGeldi, anaokulunuzdaki öğrenci teslim alma sürecini dijitalleştirir. Veliler kapıda kendini tanıtır, öğretmen anında bilgilendirilir, teslimat güvenle tamamlanır. Sistem; anaokulları, kreşler ve etüt merkezleri gibi öğrenci teslim süreci yürüten her türlü eğitim kurumunda kullanılabilir.</p>
+      <span class="hero-badge"><i class="fa-solid fa-shield-heart"><svg class="icon"><use href="/icons.svg#i-shield-heart"></use></svg></i></span>
+      <h1>Okul Çıkışını<br>Hızlandıran Sistem</h1>
+      <p class="lead">VeliGeldi, anaokulu ve kreşlerde öğrenci teslim sürecini daha düzenli ve hızlı hale getirir. Veli veya yetkili kişi giriş terminalinden kendini tanıtır; ilgili sınıfa anında bildirim ulaşır ve okul ekibi öğrenciyi hazırlamaya başlar.</p>
       <div class="hero-actions">
-        <a href="/urun" class="btn btn-primary"><i class="fa-solid fa-circle-info"><svg class="icon"><use href="#i-circle-info"></use></svg></i> Detaylı Bilgi</a>
-        <a href="/fiyatlar" class="btn btn-secondary"><i class="fa-solid fa-tags"><svg class="icon"><use href="#i-tags"></use></svg></i> Ürünleri İncele</a>
+        <a href="/urun" class="btn btn-primary"><i class="fa-solid fa-circle-info"><svg class="icon"><use href="/icons.svg#i-circle-info"></use></svg></i> Detaylı Bilgi</a>
+        <a href="/fiyatlar" class="btn btn-secondary"><i class="fa-solid fa-tags"><svg class="icon"><use href="/icons.svg#i-tags"></use></svg></i> Paketleri İncele</a>
       </div>
       <div class="hero-trust">
-        <span><i class="fa-solid fa-lock"><svg class="icon"><use href="#i-lock"></use></svg></i> Kayıt Altında Teslimat</span>
-        <span><i class="fa-solid fa-bolt"><svg class="icon"><use href="#i-bolt"></use></svg></i> Anında Bildirim</span>
-        <span><i class="fa-solid fa-mobile-screen"><svg class="icon"><use href="#i-mobile-screen"></use></svg></i> Kolay Kullanım</span>
+        <span><i class="fa-solid fa-lock"><svg class="icon"><use href="/icons.svg#i-lock"></use></svg></i> Kontrollü Giriş</span>
+        <span><i class="fa-solid fa-bolt"><svg class="icon"><use href="/icons.svg#i-bolt"></use></svg></i> Anında Bildirim</span>
+        <span><i class="fa-solid fa-mobile-screen"><svg class="icon"><use href="/icons.svg#i-mobile-screen"></use></svg></i> Kolay Kullanım</span>
       </div>
     </div>
     <div class="hero-art">
       <div class="device-card">
         <div class="dot-row"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span></div>
         <div class="avatar-row">
-          <div class="avatar"><i class="fa-solid fa-user"><svg class="icon"><use href="#i-user"></use></svg></i></div>
+          <div class="avatar"><i class="fa-solid fa-user"><svg class="icon"><use href="/icons.svg#i-user"></use></svg></i></div>
           <div class="avatar-info">
             <strong>Ayşe Yılmaz</strong>
             <small>Öğrenci: Elif Yılmaz &middot; Kelebek Sınıfı</small>
           </div>
         </div>
-        <span class="status-pill"><i class="fa-solid fa-circle-check"><svg class="icon"><use href="#i-circle-check"></use></svg></i> Öğretmen Onayladı</span>
+        <span class="status-pill"><i class="fa-solid fa-circle-check"><svg class="icon"><use href="/icons.svg#i-circle-check"></use></svg></i> Bildirim Sınıfa İletildi</span>
       </div>
     </div>
   </div>
@@ -1161,24 +124,24 @@ main > section:not(:first-child) { content-visibility: auto; contain-intrinsic-s
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">Neden VeliGeldi?</span>
-      <h2>Teslim sürecini kolaylaştıran üç temel özellik</h2>
-      <p>Anaokulunuzun kapı önü yoğunluğunu azaltır, güvenliği artırır ve tüm süreci dijital kayıt altına alır.</p>
+      <h2>Yoğun çıkış saatlerini kolaylaştıran üç özellik</h2>
+      <p>Velinin kendini tanıtmasından sınıfın bilgilendirilmesine kadar süreci birkaç saniyede başlatır.</p>
     </div>
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon icon-yellow"><i class="fa-solid fa-bell"><svg class="icon"><use href="#i-bell"></use></svg></i></div>
-        <h3>Hızlı Bildirim</h3>
-        <p>Veli kapıda bilgilerini girdiği anda, ilgili sınıf öğretmenine anında bildirim iletilir.</p>
+        <div class="feature-icon icon-yellow"><i class="fa-solid fa-bell"><svg class="icon"><use href="/icons.svg#i-bell"></use></svg></i></div>
+        <h3>Anında Sınıf Bildirimi</h3>
+        <p>Veli veya yetkili kişi kendini tanıttığında ilgili sınıfa anında bildirim iletilir.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon icon-green"><i class="fa-solid fa-shield-halved"><svg class="icon"><use href="#i-shield-halved"></use></svg></i></div>
-        <h3>Güvenli Teslimat</h3>
-        <p>Öğretmen, fotoğraf ve kayıt bilgilerini kontrol ederek onay verir; yetkisiz teslimatlar önlenir.</p>
+        <div class="feature-icon icon-green"><i class="fa-solid fa-shield-halved"><svg class="icon"><use href="/icons.svg#i-shield-halved"></use></svg></i></div>
+        <h3>Esnek Kimlik Tanıma</h3>
+        <p>T.C. kimlik numarası, telefon numarası veya kimlik kartındaki barkod ile hızlı giriş yapılabilir.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon icon-blue"><i class="fa-solid fa-hand-pointer"><svg class="icon"><use href="#i-hand-pointer"></use></svg></i></div>
+        <div class="feature-icon icon-blue"><i class="fa-solid fa-hand-pointer"><svg class="icon"><use href="/icons.svg#i-hand-pointer"></use></svg></i></div>
         <h3>Kolay Kullanım</h3>
-        <p>Dokunmatik ekran üzerinden birkaç adımda tamamlanan, veli ve öğretmen için sade bir akış.</p>
+        <p>Dokunmatik giriş terminalindeki sade ekranlar sayesinde işlem birkaç adımda tamamlanır.</p>
       </div>
     </div>
   </div>
@@ -1188,33 +151,33 @@ main > section:not(:first-child) { content-visibility: auto; contain-intrinsic-s
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">Nasıl Çalışır</span>
-      <h2>Dört adımda güvenli teslimat</h2>
-      <p>Veli kapıya geldiği andan öğrencinin güvenle teslim edilmesine kadar süren, hızlı ve sade dört adımlık bir akış.</p>
+      <h2>Dört adımda düzenli okul çıkışı</h2>
+      <p>Velinin okula gelmesiyle başlayan bildirim akışı, sınıf ekibinin öğrenciyi hazırlamasıyla devam eder.</p>
     </div>
     <div class="steps">
       <div class="step-card">
         <div class="step-number">1</div>
-        <div class="step-icon"><i class="fa-solid fa-door-open"><svg class="icon"><use href="#i-door-open"></use></svg></i></div>
-        <h3>Veli Kapıya Gelir</h3>
-        <p>Kapıdaki dokunmatik ekrandan işlem başlatılır.</p>
+        <div class="step-icon"><i class="fa-solid fa-door-open"><svg class="icon"><use href="/icons.svg#i-door-open"></use></svg></i></div>
+        <h3>Veli Terminale Gelir</h3>
+        <p>Okul girişindeki dokunmatik terminalden işlem başlatılır.</p>
       </div>
       <div class="step-card">
         <div class="step-number">2</div>
-        <div class="step-icon"><i class="fa-solid fa-keyboard"><svg class="icon"><use href="#i-keyboard"></use></svg></i></div>
-        <h3>Bilgi Girişi</h3>
-        <p>Öğrenci adı veya kayıt numarası girilir.</p>
+        <div class="step-icon"><i class="fa-solid fa-keyboard"><svg class="icon"><use href="/icons.svg#i-keyboard"></use></svg></i></div>
+        <h3>Kendini Tanıtır</h3>
+        <p>T.C. kimlik numarası, telefon numarası veya kimlik kartı barkodu kullanılır.</p>
       </div>
       <div class="step-card">
         <div class="step-number">3</div>
-        <div class="step-icon"><i class="fa-solid fa-chalkboard-user"><svg class="icon"><use href="#i-chalkboard-user"></use></svg></i></div>
-        <h3>Öğretmen Kontrolü</h3>
-        <p>Öğretmen fotoğraf ve bilgileri kontrol eder.</p>
+        <div class="step-icon"><i class="fa-solid fa-chalkboard-user"><svg class="icon"><use href="/icons.svg#i-chalkboard-user"></use></svg></i></div>
+        <h3>Bildirim İletilir</h3>
+        <p>İlgili sınıf, öğrencinin velisinin geldiğini anında görür.</p>
       </div>
       <div class="step-card">
         <div class="step-number">4</div>
-        <div class="step-icon"><i class="fa-solid fa-child-reaching"><svg class="icon"><use href="#i-child-reaching"></use></svg></i></div>
-        <h3>Teslimat</h3>
-        <p>Onay sonrası öğrenci kapıya yönlendirilir.</p>
+        <div class="step-icon"><i class="fa-solid fa-child-reaching"><svg class="icon"><use href="/icons.svg#i-child-reaching"></use></svg></i></div>
+        <h3>Öğrenci Hazırlanır</h3>
+        <p>Okul ekibi öğrenciyi hazırlayarak çıkış sürecini düzenli biçimde yürütür.</p>
       </div>
     </div>
   </div>
@@ -1229,19 +192,19 @@ main > section:not(:first-child) { content-visibility: auto; contain-intrinsic-s
     </div>
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon icon-yellow"><i class="fa-solid fa-child-reaching"><svg class="icon"><use href="#i-child-reaching"></use></svg></i></div>
+        <div class="feature-icon icon-yellow"><i class="fa-solid fa-child-reaching"><svg class="icon"><use href="/icons.svg#i-child-reaching"></use></svg></i></div>
         <h3>Anaokulları &amp; Kreşler</h3>
-        <p>Servis ve teslim saatlerindeki kapı önü yoğunluğunu azaltarak veli ve öğretmenlerin işini kolaylaştırır; en yoğun saatlerde bile teslim sürecinin düzenli ilerlemesini sağlar.</p>
+        <p>Yoğun çıkış saatlerinde sınıfların daha erken haberdar olmasını ve kapı önündeki beklemenin azalmasını sağlar.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon icon-blue"><i class="fa-solid fa-chalkboard-user"><svg class="icon"><use href="#i-chalkboard-user"></use></svg></i></div>
+        <div class="feature-icon icon-blue"><i class="fa-solid fa-chalkboard-user"><svg class="icon"><use href="/icons.svg#i-chalkboard-user"></use></svg></i></div>
         <h3>İlkokul Hazırlık Sınıfları</h3>
-        <p>Küçük yaş gruplarında veli kimliğinin kontrol edilmesinin özellikle önemli olduğu sınıflarda, mevcut kurallara ek bir dijital güvenlik katmanı sağlar.</p>
+        <p>Veli ve yetkili kişi kayıtlarını düzenli bir bildirim akışıyla bir araya getirerek okul ekibinin işini kolaylaştırır.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon icon-green"><i class="fa-solid fa-shield-halved"><svg class="icon"><use href="#i-shield-halved"></use></svg></i></div>
+        <div class="feature-icon icon-green"><i class="fa-solid fa-shield-halved"><svg class="icon"><use href="/icons.svg#i-shield-halved"></use></svg></i></div>
         <h3>Etüt ve Kurs Merkezleri</h3>
-        <p>Öğrencinin gün içinde farklı saatlerde ve farklı kişiler tarafından teslim alındığı kurumlarda, her teslimatın kayıt altına alınmasını sağlar.</p>
+        <p>Farklı çıkış saatlerini ve yoğunluğu tek bir sade akış üzerinden yönetmeye yardımcı olur.</p>
       </div>
     </div>
   </div>
@@ -1252,32 +215,32 @@ main > section:not(:first-child) { content-visibility: auto; contain-intrinsic-s
     <div class="section-head">
       <span class="eyebrow">Merak Edilenler</span>
       <h2>VeliGeldi hakkında sıkça sorulan sorular</h2>
-      <p>Kurulum, güvenlik ve günlük kullanım hakkında okullardan en sık aldığımız soruları bir araya getirdik.</p>
+      <p>Kurulum, kullanım seçenekleri ve destek hakkında en sık sorulan soruları bir araya getirdik.</p>
     </div>
     <div class="faq-list">
       <details class="faq-item" open>
         <summary>VeliGeldi kurulumu için okulumda ne gerekiyor?</summary>
-        <p>Kapı girişine yerleştirilecek bir terminal, elektrik bağlantısı ve internet erişimi (Wi-Fi veya Ethernet) yeterlidir. Kurulum ekibimiz gerekli tüm donanımı okulunuza getirip yerinde devreye alır.</p>
+        <p>Ekibimiz giriş noktalarınızı ve günlük öğrenci yoğunluğunuzu değerlendirir, uygun terminal sayısını belirler ve sistemi okulunuzda kullanıma hazır hale getirir.</p>
       </details>
       <details class="faq-item">
-        <summary>İnternet bağlantısı kesilirse sistem çalışmaya devam eder mi?</summary>
-        <p>Kısa süreli bağlantı kesintilerinde terminal, girilen bilgileri geçici olarak saklar ve bağlantı geri geldiğinde yönetim yazılımıyla senkronize eder; teslim süreci veli için kesintiye uğramaz.</p>
+        <summary>Veli veya yetkili kişi kendini nasıl tanıtır?</summary>
+        <p>T.C. kimlik numarasını ya da telefon numarasını girebilir; isterse kimlik kartındaki barkodu bağlı okuyucuya okutabilir.</p>
       </details>
       <details class="faq-item">
         <summary>Öğrenci ve veli bilgileri nasıl korunuyor?</summary>
-        <p>Tüm kayıtlar şifreli bağlantılar üzerinden yönetim yazılımına iletilir ve yalnızca yetkili öğretmen ile okul yönetimi tarafından görüntülenebilir.</p>
+        <p>Bilgiler şifreli bağlantılar üzerinden iletilir ve yalnızca okulun yetkilendirdiği kullanıcılar tarafından görüntülenebilir.</p>
       </details>
       <details class="faq-item">
         <summary>Birden fazla kapısı olan okullarda nasıl kullanılır?</summary>
-        <p>Her giriş noktasına ayrı bir terminal kurulabilir; tüm terminaller aynı yönetim yazılımına bağlı çalıştığı için hangi kapıdan hangi öğrencinin teslim alındığı tek bir panelden takip edilir.</p>
+        <p>Her giriş noktasına ayrı bir terminal kurulabilir. İhtiyacınız bir veya birden fazla terminal olsa da sistem okulunuza göre yapılandırılır.</p>
       </details>
       <details class="faq-item">
-        <summary>Mevcut güvenlik görevlisi uygulamasıyla birlikte kullanılabilir mi?</summary>
-        <p>Evet. VeliGeldi, mevcut güvenlik prosedürlerinizi değiştirmeden ek bir dijital kontrol katmanı olarak devreye girer; güvenlik görevliniz sistemi tamamlayıcı bir araç olarak kullanabilir.</p>
+        <summary>Hangi kullanım seçenekleri sunuluyor?</summary>
+        <p>Kontörlü modelde sisteme eklenen her veli veya yetkili kişi için kontör kullanılır. Ömür boyu kullanım modelinde ise tek seferlik satın alımla süresiz ve sınırsız kullanım sağlanır.</p>
       </details>
       <details class="faq-item">
-        <summary>Öğretmenlerin yönetim yazılımını kullanmak için eğitim alması gerekir mi?</summary>
-        <p>Yazılım, teknik bilgi gerektirmeyecek şekilde tasarlanmıştır. Ekibimiz kurulum sırasında kısa bir tanıtım yaparak öğretmenlerin sistemi ilk günden itibaren rahatça kullanmasını sağlar.</p>
+        <summary>Okul ekibinin eğitim alması gerekir mi?</summary>
+        <p>VeliGeldi teknik bilgi gerektirmeyecek şekilde tasarlanmıştır. Kurulum sırasında kısa bir kullanım tanıtımı yaparak ekibinizin sistemi ilk günden rahatça kullanmasını sağlarız.</p>
       </details>
       <details class="faq-item">
         <summary>VeliGeldi'yi okulumuzda kullandığımız diğer yazılımlarla birlikte kullanabilir miyiz?</summary>
@@ -1285,7 +248,7 @@ main > section:not(:first-child) { content-visibility: auto; contain-intrinsic-s
       </details>
       <details class="faq-item">
         <summary>Kurulum sonrasında teknik destek alabiliyor muyuz?</summary>
-        <p>Evet, kurulumdan sonra ekibimiz terminal ve yönetim yazılımıyla ilgili karşılaşabileceğiniz sorularda telefon veya WhatsApp üzerinden destek sağlar; arızi durumlarda yerinde müdahale de mümkündür.</p>
+        <p>Evet. Kurulumdan sonra telefon ve WhatsApp üzerinden uzaktan destek, bakım ve ürün iyileştirmeleri konusunda yanınızda oluruz; gerektiğinde yerinde destek de planlanabilir.</p>
       </details>
     </div>
   </div>
@@ -1295,41 +258,42 @@ main > section:not(:first-child) { content-visibility: auto; contain-intrinsic-s
   <div class="container">
     <div class="cta-band">
       <h2>Okulunuz için VeliGeldi'yi keşfedin</h2>
-      <p>Gaziantep merkezli ekibimiz, okulunuzun büyüklüğüne ve ihtiyacına uygun ürün ve fiyat teklifini hazırlamak için sizinle iletişime geçmeye hazır; dilerseniz size özel bir demo da planlayabiliriz.</p>
+      <p>Okulunuzun giriş sayısına ve kullanım tercihinize uygun terminal ve fiyat teklifini birlikte hazırlayalım.</p>
       <a href="/iletisim" class="btn btn-primary">Hemen İletişime Geçin</a>
     </div>
   </div>
 </section>
 </main>
 
-<div class="modal-overlay" id="price-modal" role="dialog" aria-modal="true" aria-labelledby="price-modal-title">
+<div class="modal-overlay" id="price-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="price-modal-title" tabindex="-1">
   <div class="modal-card">
     <button type="button" class="modal-close" data-close-modal aria-label="Kapat">&times;</button>
-    <h2 id="price-modal-title" style="margin-bottom:8px;">Bize Ulaşın</h2>
-    <p style="margin-bottom:24px;">Aşağıdaki formu doldurun; bilgileriniz WhatsApp üzerinden doğrudan bize iletilsin.</p>
+    <h2 id="price-modal-title" class="form-heading">Bize Ulaşın</h2>
+    <p class="form-intro">Aşağıdaki formu doldurun; bilgileriniz WhatsApp üzerinden doğrudan bize iletilsin.</p>
 
-    <div class="form-success" id="form-success">
-      <i class="fa-solid fa-circle-check"><svg class="icon"><use href="#i-circle-check"></use></svg></i>
+    <div class="form-success" id="form-success" role="status" aria-live="polite">
+      <i class="fa-solid fa-circle-check"><svg class="icon"><use href="/icons.svg#i-circle-check"></use></svg></i>
       <span>WhatsApp açılıyor! Açılan pencereden mesajınızı göndermeniz yeterli.</span>
     </div>
 
-    <form id="contact-form" novalidate>
+    <noscript><p class="noscript-note">Mesaj formu için JavaScript gereklidir. Lütfen 0850 303 24 85 numarasını arayın veya WhatsApp üzerinden yazın.</p></noscript>
+    <form id="contact-form" class="whatsapp-form" action="/iletisim" method="post">
       <div class="form-row">
         <div class="form-group">
           <label for="full-name">Ad Soyad *</label>
-          <input type="text" id="full-name" name="full-name" placeholder="Adınız Soyadınız" required>
+          <input type="text" id="full-name" name="full-name" autocomplete="name" placeholder="Adınız Soyadınız" required>
         </div>
         <div class="form-group">
           <label for="phone">Telefon</label>
-          <input type="tel" id="phone" name="phone" placeholder="+90 5xx xxx xx xx">
+          <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+90 5xx xxx xx xx">
         </div>
       </div>
       <div class="form-group">
         <label for="message">Mesaj *</label>
         <textarea id="message" name="message" placeholder="Okulunuz ve ihtiyaçlarınız hakkında kısaca bilgi verin..." required></textarea>
       </div>
-      <button type="submit" class="btn btn-whatsapp btn-block"><i class="fa-brands fa-whatsapp"><svg class="icon"><use href="#i-whatsapp"></use></svg></i> WhatsApp ile Gönder</button>
-      <p class="form-note">* Gönder'e bastığınızda, girdiğiniz bilgilerle hazırlanmış mesaj WhatsApp üzerinden 0850 303 24 85 numarasına iletilmek üzere açılır.</p>
+      <button type="submit" class="btn btn-whatsapp btn-block"><i class="fa-brands fa-whatsapp"><svg class="icon"><use href="/icons.svg#i-whatsapp"></use></svg></i> WhatsApp ile Gönder</button>
+      <p class="form-note">Gönder düğmesi, yazdığınız bilgilerle WhatsApp mesajını cihazınızda hazırlar; bu site form içeriğini kaydetmez. <a href="/gizlilik">Gizlilik bilgilendirmesini okuyun.</a></p>
     </form>
   </div>
 </div>
@@ -1339,10 +303,10 @@ main > section:not(:first-child) { content-visibility: auto; contain-intrinsic-s
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="logo"><span class="logo-badge"><img src="/logo.svg" alt="" width="84" height="84"></span> VeliGeldi<span class="visually-hidden"> Anasayfa</span></a>
-        <p>Anaokullarında öğrenci teslim alma sürecini güvenli ve dijital hale getiren sistem.</p>
+        <p>Anaokullarında öğrenci teslim sürecini hızlı ve düzenli hale getiren sistem.</p>
         <div class="social-row">
-          <a href="https://www.instagram.com/stabilteknoloji/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"><svg class="icon"><use href="#i-instagram"></use></svg></i></a>
-          <a href="https://wa.me/908503032485" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"><svg class="icon"><use href="#i-whatsapp"></use></svg></i></a>
+          <a href="https://www.instagram.com/stabilteknoloji/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"><svg class="icon"><use href="/icons.svg#i-instagram"></use></svg></i></a>
+          <a href="https://wa.me/908503032485" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"><svg class="icon"><use href="/icons.svg#i-whatsapp"></use></svg></i></a>
         </div>
       </div>
       <div class="footer-col">
@@ -1350,7 +314,7 @@ main > section:not(:first-child) { content-visibility: auto; contain-intrinsic-s
         <ul>
           <li><a href="/">Anasayfa</a></li>
           <li><a href="/urun">Sistem Hakkında</a></li>
-          <li><a href="/fiyatlar">Ürün ve Fiyatlar</a></li>
+          <li><a href="/fiyatlar">Paketler ve Fiyat</a></li>
           <li><a href="/iletisim">İletişim Formu</a></li>
         </ul>
       </div>
@@ -1360,13 +324,14 @@ main > section:not(:first-child) { content-visibility: auto; contain-intrinsic-s
           <li><a href="/urun">Nasıl Çalışır?</a></li>
           <li><a href="/iletisim">Fiyat Teklifi Alın</a></li>
           <li><a href="/fiyatlar">Sık Sorulan Sorular</a></li>
+          <li><a href="/gizlilik">Gizlilik Bilgilendirmesi</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h3>İletişim</h3>
-        <div class="info-line"><i class="fa-solid fa-location-dot"><svg class="icon"><use href="#i-location-dot"></use></svg></i><span>Pancarlı, Yüksel İyi Köşker Sk. Ahmet Taşar Apt D:20/B, 27410 Şehitkamil/Gaziantep</span></div>
-        <div class="info-line"><i class="fa-solid fa-phone"><svg class="icon"><use href="#i-phone"></use></svg></i><span>0850 303 24 85</span></div>
-        <div class="info-line"><i class="fa-solid fa-envelope"><svg class="icon"><use href="#i-envelope"></use></svg></i><span>adnan@stabilteknoloji.com</span></div>
+        <div class="info-line"><i class="fa-solid fa-location-dot"><svg class="icon"><use href="/icons.svg#i-location-dot"></use></svg></i><span>Pancarlı, Yüksel İyi Köşker Sk. Ahmet Taşar Apt D:20/B, 27410 Şehitkamil/Gaziantep</span></div>
+        <div class="info-line"><i class="fa-solid fa-phone"><svg class="icon"><use href="/icons.svg#i-phone"></use></svg></i><span>0850 303 24 85</span></div>
+        <div class="info-line"><i class="fa-solid fa-envelope"><svg class="icon"><use href="/icons.svg#i-envelope"></use></svg></i><span>adnan@stabilteknoloji.com</span></div>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1379,13 +344,13 @@ main > section:not(:first-child) { content-visibility: auto; contain-intrinsic-s
 <script src="/js/main.js" defer></script>
 <div class="floating-call-wrap">
   <a href="tel:+908503032485" class="floating-call" aria-label="Hemen Ara">
-    <svg class="icon"><use href="#i-phone"></use></svg>
+    <svg class="icon"><use href="/icons.svg#i-phone"></use></svg>
     <span>Hemen Ara</span>
   </a>
   <span class="call-nudge" aria-hidden="true">Sorularınız mı var? Hemen arayın! 📞</span>
 </div>
 <a href="/iletisim" class="bottom-bar" aria-label="İletişime Geç" data-open-modal="price-modal">
-  <svg class="icon"><use href="#i-envelope"></use></svg>
+  <svg class="icon"><use href="/icons.svg#i-envelope"></use></svg>
   <span>İletişime Geç</span>
 </a>
 </body>

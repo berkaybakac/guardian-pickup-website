@@ -1,8 +1,37 @@
 const WHATSAPP_NUMBER = '908503032485';
+const FOCUSABLE_SELECTOR = [
+  'a[href]',
+  'button:not([disabled])',
+  'input:not([disabled])',
+  'textarea:not([disabled])',
+  'select:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])'
+].join(',');
+
+let activeModalTrigger = null;
+
+document.documentElement.classList.add('js-enabled');
 
 function closeModal(modal) {
   modal.classList.remove('open');
-  document.body.style.overflow = '';
+  modal.setAttribute('aria-hidden', 'true');
+
+  if (!document.querySelector('.modal-overlay.open')) {
+    document.body.style.overflow = '';
+  }
+
+  activeModalTrigger?.focus();
+  activeModalTrigger = null;
+}
+
+function openModal(modal, trigger) {
+  activeModalTrigger = trigger;
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+
+  const firstFocusableElement = modal.querySelector(FOCUSABLE_SELECTOR);
+  firstFocusableElement?.focus();
 }
 
 function initializeNavigation() {
@@ -13,18 +42,29 @@ function initializeNavigation() {
     return;
   }
 
+  const closeNavigation = () => {
+    header.classList.remove('nav-open');
+    menuToggle.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('nav-active');
+  };
+
   menuToggle.addEventListener('click', () => {
     const isOpen = header.classList.toggle('nav-open');
     menuToggle.classList.toggle('open', isOpen);
     menuToggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.classList.toggle('nav-active', isOpen);
   });
 
   document.querySelectorAll('.nav-links a').forEach((link) => {
-    link.addEventListener('click', () => {
-      header.classList.remove('nav-open');
-      menuToggle.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-    });
+    link.addEventListener('click', closeNavigation);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && header.classList.contains('nav-open')) {
+      closeNavigation();
+      menuToggle.focus();
+    }
   });
 }
 
@@ -38,12 +78,13 @@ function initializeModals() {
       }
 
       event.preventDefault();
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      openModal(modal, button);
     });
   });
 
   document.querySelectorAll('.modal-overlay').forEach((modal) => {
+    modal.setAttribute('aria-hidden', 'true');
+
     modal.addEventListener('click', (event) => {
       if (event.target === modal) {
         closeModal(modal);
@@ -55,11 +96,44 @@ function initializeModals() {
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key !== 'Escape') {
+    const openModalElement = document.querySelector('.modal-overlay.open');
+
+    if (!openModalElement) {
       return;
     }
 
-    document.querySelectorAll('.modal-overlay.open').forEach(closeModal);
+    if (event.key === 'Escape') {
+      closeModal(openModalElement);
+      return;
+    }
+
+    if (event.key !== 'Tab') {
+      return;
+    }
+
+    const focusableElements = [
+      ...openModalElement.querySelectorAll(FOCUSABLE_SELECTOR)
+    ];
+
+    if (!focusableElements.length) {
+      event.preventDefault();
+      openModalElement.focus();
+      return;
+    }
+
+    const firstFocusableElement = focusableElements[0];
+    const lastFocusableElement = focusableElements.at(-1);
+
+    if (event.shiftKey && document.activeElement === firstFocusableElement) {
+      event.preventDefault();
+      lastFocusableElement.focus();
+    } else if (
+      !event.shiftKey &&
+      document.activeElement === lastFocusableElement
+    ) {
+      event.preventDefault();
+      firstFocusableElement.focus();
+    }
   });
 }
 
@@ -136,7 +210,13 @@ function initializeWhatsAppForms() {
           `https://wa.me/${WHATSAPP_NUMBER}?text=` +
           encodeURIComponent(messageLines.join('\n'));
 
-        window.open(whatsappUrl, '_blank', 'noopener');
+        const whatsappWindow = window.open(whatsappUrl, '_blank');
+
+        if (whatsappWindow) {
+          whatsappWindow.opener = null;
+        } else {
+          window.location.assign(whatsappUrl);
+        }
 
         const successBoxId =
           form.id === 'modal-contact-form'
@@ -168,6 +248,7 @@ function initializeMap() {
     mapFrame.loading = 'lazy';
     mapFrame.referrerPolicy = 'no-referrer-when-downgrade';
     mapFrame.title = 'VeliGeldi Konum';
+    mapFrame.allowFullscreen = true;
     mapButton.replaceWith(mapFrame);
   });
 }
@@ -181,6 +262,7 @@ function initializeDownloadFeedback() {
       button.addEventListener('click', () => {
         if (downloadStatus) {
           downloadStatus.style.display = 'block';
+          downloadStatus.focus();
         }
       });
     });

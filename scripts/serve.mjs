@@ -16,6 +16,8 @@ const routeMap = new Map([
   ['/fiyatlar/', 'pricing.html'],
   ['/iletisim', 'contact.html'],
   ['/iletisim/', 'contact.html'],
+  ['/gizlilik', 'privacy.html'],
+  ['/gizlilik/', 'privacy.html'],
   ['/indir', 'download.html'],
   ['/indir/', 'download.html']
 ]);
