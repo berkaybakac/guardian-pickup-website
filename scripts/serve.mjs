@@ -3,24 +3,20 @@ import { createServer } from 'node:http';
 import { extname, join, normalize, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { pages } from '../config/site.mjs';
+
 const host = '127.0.0.1';
 const port = Number.parseInt(process.env.PORT ?? '8080', 10);
 const projectRoot = fileURLToPath(new URL('..', import.meta.url));
 const websiteRoot = join(projectRoot, 'website');
 
-const routeMap = new Map([
-  ['/', 'index.html'],
-  ['/urun', 'product.html'],
-  ['/urun/', 'product.html'],
-  ['/fiyatlar', 'pricing.html'],
-  ['/fiyatlar/', 'pricing.html'],
-  ['/iletisim', 'contact.html'],
-  ['/iletisim/', 'contact.html'],
-  ['/gizlilik', 'privacy.html'],
-  ['/gizlilik/', 'privacy.html'],
-  ['/indir', 'download.html'],
-  ['/indir/', 'download.html']
-]);
+const routeMap = new Map(
+  pages.flatMap(({ file, route }) =>
+    route === '/'
+      ? [[route, file]]
+      : [[route, file], [`${route}/`, file]]
+  )
+);
 
 const contentTypes = new Map([
   ['.css', 'text/css; charset=utf-8'],

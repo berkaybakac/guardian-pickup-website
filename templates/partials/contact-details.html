@@ -1,0 +1,46 @@
+<div class="contact-side">
+  <div class="info-card">
+    <div class="info-item">
+      <div class="info-icon"><i class="fa-solid fa-location-dot"><svg class="icon"><use href="/icons.svg#i-location-dot"></use></svg></i></div>
+      <div>
+        <strong>Adres</strong>
+        <p>{{ADDRESS_FULL}}</p>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon"><i class="fa-solid fa-phone"><svg class="icon"><use href="/icons.svg#i-phone"></use></svg></i></div>
+      <div>
+        <strong>Telefon</strong>
+        <p><a href="tel:{{PHONE_HREF}}">{{PHONE_DISPLAY}}</a></p>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon"><i class="fa-brands fa-whatsapp"><svg class="icon"><use href="/icons.svg#i-whatsapp"></use></svg></i></div>
+      <div>
+        <strong>WhatsApp</strong>
+        <p><a href="https://wa.me/{{WHATSAPP_NUMBER}}" target="_blank" rel="noopener">{{PHONE_DISPLAY}}</a></p>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon"><i class="fa-solid fa-envelope"><svg class="icon"><use href="/icons.svg#i-envelope"></use></svg></i></div>
+      <div>
+        <strong>E-posta</strong>
+        <p>{{EMAIL}}</p>
+      </div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon"><i class="fa-solid fa-clock"><svg class="icon"><use href="/icons.svg#i-clock"></use></svg></i></div>
+      <div>
+        <strong>Çalışma Saatleri</strong>
+        <p>{{WORKING_HOURS}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-embed">
+    <button type="button" class="map-placeholder" id="map-load-btn" data-map-url="{{MAP_EMBED_URL}}">
+      <i class="fa-solid fa-location-dot"><svg class="icon"><use href="/icons.svg#i-location-dot"></use></svg></i>
+      <span>Haritayı Göster</span>
+    </button>
+  </div>
+</div>

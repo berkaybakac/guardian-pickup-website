@@ -26,7 +26,7 @@ The project is intentionally implemented as a dependency-free static website. It
 - SEO metadata, Open Graph tags, JSON-LD, `robots.txt`, and XML sitemap
 - WhatsApp-based enquiry forms with native browser validation and a safe POST fallback
 - No client-side tracking, database, or storage of form submissions
-- Single-source header, footer, and enquiry-dialog templates
+- Single-source routes, metadata, company details, and shared HTML templates
 - Dependency-free validation script and GitHub Actions quality checks
 
 ## Technology
@@ -62,7 +62,10 @@ The content remains readable without JavaScript. JavaScript adds the mobile menu
 
 ### Shared HTML maintenance
 
-Headers, footers, and enquiry dialogs are maintained in `templates/partials/`. After changing a shared partial, synchronize the deployable HTML pages:
+Routes, page metadata, and company contact details are maintained in
+`config/site.mjs`. Document heads, headers, contact sections, footers, and
+enquiry dialogs are maintained in `templates/partials/`. After changing the
+configuration or a shared partial, synchronize the deployable HTML pages:
 
 ```bash
 node scripts/sync-shared-html.mjs
@@ -91,6 +94,8 @@ This separation keeps existing customer links unchanged while maintaining Englis
 │   └── workflows/
 │       └── site-quality.yml
 ├── README.md
+├── config/
+│   └── site.mjs
 ├── docs/
 │   ├── screenshots/
 │   │   ├── home-desktop.jpg
@@ -102,9 +107,14 @@ This separation keeps existing customer links unchanged while maintaining Englis
 │   └── validate.mjs
 ├── templates/
 │   └── partials/
+│       ├── contact-actions.html
+│       ├── contact-details.html
+│       ├── contact-form.html
 │       ├── contact-modal.html
+│       ├── document-head.html
 │       ├── header.html
-│       └── page-footer.html
+│       ├── page-footer.html
+│       └── privacy-contact.html
 └── website/
     ├── css/
     │   └── site.css

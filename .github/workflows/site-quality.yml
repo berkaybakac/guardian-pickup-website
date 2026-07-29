@@ -25,6 +25,7 @@ jobs:
 
       - name: Check JavaScript syntax
         run: |
+          node --check config/site.mjs
           node --check website/js/main.js
           node --check scripts/serve.mjs
           node --check scripts/sync-shared-html.mjs

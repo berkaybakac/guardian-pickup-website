@@ -1,4 +1,3 @@
-const WHATSAPP_NUMBER = '908503032485';
 const FOCUSABLE_SELECTOR = [
   'a[href]',
   'button:not([disabled])',
@@ -200,6 +199,12 @@ function initializeWhatsAppForms() {
         const fullName = form.querySelector('[name="full-name"]').value.trim();
         const phoneNumber = form.querySelector('[name="phone"]').value.trim();
         const message = form.querySelector('[name="message"]').value.trim();
+        const whatsappNumber = form.dataset.whatsappNumber;
+
+        if (!whatsappNumber) {
+          return;
+        }
+
         const messageLines = [
           'Merhaba, VeliGeldi web sitesinden yazıyorum.',
           `Ad Soyad: ${fullName}`,
@@ -207,7 +212,7 @@ function initializeWhatsAppForms() {
           `Mesaj: ${message}`
         ].filter(Boolean);
         const whatsappUrl =
-          `https://wa.me/${WHATSAPP_NUMBER}?text=` +
+          `https://wa.me/${whatsappNumber}?text=` +
           encodeURIComponent(messageLines.join('\n'));
 
         const whatsappWindow = window.open(whatsappUrl, '_blank');
@@ -242,9 +247,14 @@ function initializeMap() {
   }
 
   mapButton.addEventListener('click', () => {
+    const mapUrl = mapButton.dataset.mapUrl;
+
+    if (!mapUrl) {
+      return;
+    }
+
     const mapFrame = document.createElement('iframe');
-    mapFrame.src =
-      'https://www.google.com/maps?q=Pancarl%C4%B1%2C%20Y%C3%BCksel%20%C4%B0yi%20K%C3%B6%C5%9Fker%20Sk.%20Ahmet%20Ta%C5%9Far%20Apt%20D%3A20%2FB%2C%2027410%20%C5%9Eehitkamil%2FGaziantep&output=embed';
+    mapFrame.src = mapUrl;
     mapFrame.loading = 'lazy';
     mapFrame.referrerPolicy = 'no-referrer-when-downgrade';
     mapFrame.title = 'VeliGeldi Konum';

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+<!-- shared:document-head:start -->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
 <link rel="preload" href="/fonts/opensans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <title>Paketler ve Fiyat | VeliGeldi</title>
 <meta name="description" content="VeliGeldi giriş terminalini, kontörlü ve ömür boyu kullanım seçeneklerini inceleyin; okulunuza özel fiyat teklifi alın.">
+
 <link rel="canonical" href="https://veligeldi.com/fiyatlar">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="tr_TR">
@@ -25,8 +27,8 @@
 <meta property="og:image:alt" content="VeliGeldi logosu">
 <meta name="twitter:image" content="https://veligeldi.com/img/veligeldi-logo-mark.png">
 <meta name="twitter:image:alt" content="VeliGeldi logosu">
-<link rel="icon" type="image/svg+xml" href="logo.svg">
-<link rel="apple-touch-icon" href="img/veligeldi-logo-mark.png">
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+<link rel="apple-touch-icon" href="/img/veligeldi-logo-mark.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -45,17 +47,20 @@
   },
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": "+90-850-303-24-85",
+    "telephone": "+908503032485",
     "contactType": "customer service",
     "email": "adnan@stabilteknoloji.com",
     "areaServed": "TR",
     "availableLanguage": "Turkish"
   },
-  "sameAs": ["https://www.instagram.com/stabilteknoloji/"]
+  "sameAs": [
+    "https://www.instagram.com/stabilteknoloji/"
+  ]
 }
 </script>
 <link rel="stylesheet" href="/css/site.css">
 </head>
+<!-- shared:document-head:end -->
 <body>
 
 <!-- shared:header:start -->
@@ -205,33 +210,33 @@
 <div class="modal-overlay" id="price-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="price-modal-title" tabindex="-1">
   <div class="modal-card">
     <button type="button" class="modal-close" data-close-modal aria-label="Kapat">&times;</button>
-    <h2 id="price-modal-title" class="form-heading">Bize Ulaşın</h2>
-    <p class="form-intro">Aşağıdaki formu doldurun; bilgileriniz WhatsApp üzerinden doğrudan bize iletilsin.</p>
+<h2 id="price-modal-title" class="form-heading">Bize Ulaşın</h2>
+<p class="form-intro">Aşağıdaki formu doldurun; bilgileriniz WhatsApp üzerinden doğrudan bize iletilsin.</p>
 
-    <div class="form-success" id="form-success" role="status" aria-live="polite">
-      <i class="fa-solid fa-circle-check"><svg class="icon"><use href="/icons.svg#i-circle-check"></use></svg></i>
-      <span>WhatsApp açılıyor! Açılan pencereden mesajınızı göndermeniz yeterli.</span>
+<div class="form-success" id="form-success" role="status" aria-live="polite">
+  <i class="fa-solid fa-circle-check"><svg class="icon"><use href="/icons.svg#i-circle-check"></use></svg></i>
+  <span>WhatsApp açılıyor! Açılan pencereden mesajınızı göndermeniz yeterli.</span>
+</div>
+
+<noscript><p class="noscript-note">Mesaj formu için JavaScript gereklidir. Lütfen 0850 303 24 85 numarasını arayın veya WhatsApp üzerinden yazın.</p></noscript>
+<form id="contact-form" class="whatsapp-form" action="/iletisim" method="post" data-whatsapp-number="908503032485">
+  <div class="form-row">
+    <div class="form-group">
+      <label for="full-name">Ad Soyad *</label>
+      <input type="text" id="full-name" name="full-name" autocomplete="name" placeholder="Adınız Soyadınız" required>
     </div>
-
-    <noscript><p class="noscript-note">Mesaj formu için JavaScript gereklidir. Lütfen 0850 303 24 85 numarasını arayın veya WhatsApp üzerinden yazın.</p></noscript>
-    <form id="contact-form" class="whatsapp-form" action="/iletisim" method="post">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="full-name">Ad Soyad *</label>
-          <input type="text" id="full-name" name="full-name" autocomplete="name" placeholder="Adınız Soyadınız" required>
-        </div>
-        <div class="form-group">
-          <label for="phone">Telefon</label>
-          <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+90 5xx xxx xx xx">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="message">Mesaj *</label>
-        <textarea id="message" name="message" placeholder="Okulunuz ve ihtiyaçlarınız hakkında kısaca bilgi verin..." required></textarea>
-      </div>
-      <button type="submit" class="btn btn-whatsapp btn-block"><i class="fa-brands fa-whatsapp"><svg class="icon"><use href="/icons.svg#i-whatsapp"></use></svg></i> WhatsApp ile Gönder</button>
-      <p class="form-note">Gönder düğmesi, yazdığınız bilgilerle WhatsApp mesajını cihazınızda hazırlar; bu site form içeriğini kaydetmez. <a href="/gizlilik">Gizlilik bilgilendirmesini okuyun.</a></p>
-    </form>
+    <div class="form-group">
+      <label for="phone">Telefon</label>
+      <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+90 5xx xxx xx xx">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="message">Mesaj *</label>
+    <textarea id="message" name="message" placeholder="Okulunuz ve ihtiyaçlarınız hakkında kısaca bilgi verin..." required></textarea>
+  </div>
+  <button type="submit" class="btn btn-whatsapp btn-block"><i class="fa-brands fa-whatsapp"><svg class="icon"><use href="/icons.svg#i-whatsapp"></use></svg></i> WhatsApp ile Gönder</button>
+  <p class="form-note">Gönder düğmesi, yazdığınız bilgilerle WhatsApp mesajını cihazınızda hazırlar; bu site form içeriğini kaydetmez. <a href="/gizlilik">Gizlilik bilgilendirmesini okuyun.</a></p>
+</form>
   </div>
 </div>
 <!-- shared:contact-modal:end -->
