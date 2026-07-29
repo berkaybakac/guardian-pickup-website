@@ -1,10 +1,12 @@
+const organizationDescription =
+  'VeliGeldi; anaokulu, kreş, etüt ve kurs merkezlerinde öğrenci teslim sürecini daha düzenli, hızlı ve dijital hale getiren bir sistemdir.';
+
 export const site = Object.freeze({
   name: 'VeliGeldi',
   origin: 'https://veligeldi.com',
   locale: 'tr_TR',
   language: 'tr',
-  organizationDescription:
-    'VeliGeldi; anaokulu, kreş, etüt ve kurs merkezlerinde öğrenci teslim sürecini daha düzenli, hızlı ve dijital hale getiren bir sistemdir.',
+  organizationDescription,
   socialImagePath: '/img/veligeldi-logo-mark.png'
 });
 
@@ -31,8 +33,7 @@ export const pages = Object.freeze([
     file: 'index.html',
     route: '/',
     title: 'VeliGeldi | Anaokulu Öğrenci Teslim Sistemi',
-    description:
-      'VeliGeldi; anaokulu, kreş, etüt ve kurs merkezlerinde öğrenci teslim sürecini daha düzenli, hızlı ve dijital hale getiren bir sistemdir.',
+    description: organizationDescription,
     sitemapPriority: '1.0',
     activeNavigation: 'home',
     includeModal: true,
