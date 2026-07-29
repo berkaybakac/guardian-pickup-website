@@ -8,6 +8,13 @@ The project is intentionally implemented as a dependency-free static website. It
 
 > Production deployment to [veligeldi.com](https://veligeldi.com) is in progress.
 
+## Preview
+
+<p align="center">
+  <img src="docs/screenshots/home-desktop.jpg" alt="VeliGeldi desktop homepage" width="68%">
+  <img src="docs/screenshots/home-mobile.jpg" alt="VeliGeldi mobile homepage" width="25%">
+</p>
+
 ## Project highlights
 
 - Responsive layouts for mobile and desktop screens
@@ -19,6 +26,7 @@ The project is intentionally implemented as a dependency-free static website. It
 - SEO metadata, Open Graph tags, JSON-LD, `robots.txt`, and XML sitemap
 - WhatsApp-based enquiry forms with native browser validation and a safe POST fallback
 - No client-side tracking, database, or storage of form submissions
+- Single-source header, footer, and enquiry-dialog templates
 - Dependency-free validation script and GitHub Actions quality checks
 
 ## Technology
@@ -32,7 +40,7 @@ The project is intentionally implemented as a dependency-free static website. It
 | Hosting target | Nginx on an Ubuntu virtual machine |
 | TLS target | Let's Encrypt |
 
-No package installation or build command is required.
+No package installation or production build command is required.
 
 ## Engineering decisions
 
@@ -51,6 +59,14 @@ Form data is not sent to or stored by a backend. After native validation, the br
 ### Progressive enhancement
 
 The content remains readable without JavaScript. JavaScript adds the mobile menu, modal behaviour, reveal animations, lazy map loading, disabled-download feedback, and WhatsApp form handling.
+
+### Shared HTML maintenance
+
+Headers, footers, and enquiry dialogs are maintained in `templates/partials/`. After changing a shared partial, synchronize the deployable HTML pages:
+
+```bash
+node scripts/sync-shared-html.mjs
+```
 
 ## Public routes
 
@@ -76,10 +92,19 @@ This separation keeps existing customer links unchanged while maintaining Englis
 │       └── site-quality.yml
 ├── README.md
 ├── docs/
+│   ├── screenshots/
+│   │   ├── home-desktop.jpg
+│   │   └── home-mobile.jpg
 │   └── website.md
 ├── scripts/
 │   ├── serve.mjs
+│   ├── sync-shared-html.mjs
 │   └── validate.mjs
+├── templates/
+│   └── partials/
+│       ├── contact-modal.html
+│       ├── header.html
+│       └── page-footer.html
 └── website/
     ├── css/
     │   └── site.css
@@ -119,6 +144,7 @@ PORT=3000 node scripts/serve.mjs
 The quality check validates page metadata, local asset references, unique element IDs, JSON-LD, form fallbacks, shared styling, and product-claim guardrails.
 
 ```bash
+node scripts/sync-shared-html.mjs --check
 node scripts/validate.mjs
 ```
 

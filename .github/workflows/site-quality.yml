@@ -27,7 +27,11 @@ jobs:
         run: |
           node --check website/js/main.js
           node --check scripts/serve.mjs
+          node --check scripts/sync-shared-html.mjs
           node --check scripts/validate.mjs
+
+      - name: Check shared HTML
+        run: node scripts/sync-shared-html.mjs --check
 
       - name: Validate static site
         run: node scripts/validate.mjs

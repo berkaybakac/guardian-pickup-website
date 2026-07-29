@@ -59,11 +59,12 @@
 </head>
 <body>
 
+<!-- shared:header:start -->
 <header class="site-header">
   <div class="container">
     <a href="/" class="logo">
       <span class="logo-badge"><img src="/logo.svg" alt="" width="84" height="84"></span>
-      VeliGeldi<span class="logo-sub"></span>
+      VeliGeldi
     </a>
     <nav class="nav-links" id="primary-navigation" aria-label="Ana menü">
       <a href="/">Ana Sayfa</a>
@@ -79,6 +80,7 @@
     </div>
   </div>
 </header>
+<!-- shared:header:end -->
 
 <main>
 
@@ -117,6 +119,7 @@
 
 </main>
 
+<!-- shared:contact-modal:start -->
 <div class="modal-overlay" id="price-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="price-modal-title" tabindex="-1">
   <div class="modal-card">
     <button type="button" class="modal-close" data-close-modal aria-label="Kapat">&times;</button>
@@ -149,7 +152,8 @@
     </form>
   </div>
 </div>
-
+<!-- shared:contact-modal:end -->
+<!-- shared:page-footer:start -->
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
@@ -167,14 +171,14 @@
           <li><a href="/">Anasayfa</a></li>
           <li><a href="/urun">Sistem Hakkında</a></li>
           <li><a href="/fiyatlar">Paketler ve Fiyat</a></li>
-          <li><a href="/iletisim" data-open-modal="price-modal">İletişim Formu</a></li>
+          <li><a href="/iletisim">İletişim Formu</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h3>Kurumsal</h3>
         <ul>
           <li><a href="/urun">Nasıl Çalışır?</a></li>
-          <li><a href="/iletisim" data-open-modal="price-modal">Fiyat Teklifi Alın</a></li>
+          <li><a href="/iletisim">Fiyat Teklifi Alın</a></li>
           <li><a href="/fiyatlar">Sık Sorulan Sorular</a></li>
           <li><a href="/gizlilik">Gizlilik Bilgilendirmesi</a></li>
         </ul>
@@ -205,5 +209,6 @@
   <svg class="icon"><use href="/icons.svg#i-envelope"></use></svg>
   <span>İletişime Geç</span>
 </a>
+<!-- shared:page-footer:end -->
 </body>
 </html>

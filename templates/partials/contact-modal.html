@@ -1,0 +1,32 @@
+<div class="modal-overlay" id="price-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="price-modal-title" tabindex="-1">
+  <div class="modal-card">
+    <button type="button" class="modal-close" data-close-modal aria-label="Kapat">&times;</button>
+    <h2 id="price-modal-title" class="form-heading">Bize Ulaşın</h2>
+    <p class="form-intro">Aşağıdaki formu doldurun; bilgileriniz WhatsApp üzerinden doğrudan bize iletilsin.</p>
+
+    <div class="form-success" id="{{SUCCESS_ID}}" role="status" aria-live="polite">
+      <i class="fa-solid fa-circle-check"><svg class="icon"><use href="/icons.svg#i-circle-check"></use></svg></i>
+      <span>WhatsApp açılıyor! Açılan pencereden mesajınızı göndermeniz yeterli.</span>
+    </div>
+
+    <noscript><p class="noscript-note">Mesaj formu için JavaScript gereklidir. Lütfen 0850 303 24 85 numarasını arayın veya WhatsApp üzerinden yazın.</p></noscript>
+    <form id="{{FORM_ID}}" class="whatsapp-form" action="/iletisim" method="post">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="{{FIELD_PREFIX}}full-name">Ad Soyad *</label>
+          <input type="text" id="{{FIELD_PREFIX}}full-name" name="full-name" autocomplete="name" placeholder="Adınız Soyadınız" required>
+        </div>
+        <div class="form-group">
+          <label for="{{FIELD_PREFIX}}phone">Telefon</label>
+          <input type="tel" id="{{FIELD_PREFIX}}phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+90 5xx xxx xx xx">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{FIELD_PREFIX}}message">Mesaj *</label>
+        <textarea id="{{FIELD_PREFIX}}message" name="message" placeholder="Okulunuz ve ihtiyaçlarınız hakkında kısaca bilgi verin..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-whatsapp btn-block"><i class="fa-brands fa-whatsapp"><svg class="icon"><use href="/icons.svg#i-whatsapp"></use></svg></i> WhatsApp ile Gönder</button>
+      <p class="form-note">Gönder düğmesi, yazdığınız bilgilerle WhatsApp mesajını cihazınızda hazırlar; bu site form içeriğini kaydetmez. <a href="/gizlilik">Gizlilik bilgilendirmesini okuyun.</a></p>
+    </form>
+  </div>
+</div>
