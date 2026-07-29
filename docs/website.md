@@ -186,11 +186,13 @@ The production server must:
 1. Serve files from the `website/` directory.
 2. Map the Turkish public routes to the English HTML source files.
 3. Redirect HTTP traffic to HTTPS.
-4. Select one canonical hostname and redirect the alternative.
+4. Serve both production hostnames with canonical metadata.
 5. Serve static assets with appropriate cache headers.
 6. Preserve MIME types for SVG, WebP, WOFF2, JavaScript, and CSS.
 
-The exact Nginx configuration will be created after the Ubuntu VM, network, and DNS configuration have been inspected.
+The reviewed Nginx bootstrap configuration is versioned at
+`deploy/nginx/veligeldi.conf`. Production TLS is provisioned and renewed by
+Certbot on the Ubuntu host.
 
 ## Change-safety rule
 

@@ -6,7 +6,7 @@ It is a responsive, Turkish-language product website for a digital student hando
 
 The project is intentionally implemented as a dependency-free static website. It can be served efficiently from a small virtual machine without a JavaScript framework, build pipeline, application server, or database.
 
-> Production deployment to [veligeldi.com](https://veligeldi.com) is in progress.
+> The production website is live at [veligeldi.com](https://veligeldi.com).
 
 ## Preview
 
@@ -37,8 +37,8 @@ The project is intentionally implemented as a dependency-free static website. It
 | Styling | CSS3, Grid, Flexbox, responsive media queries |
 | Behaviour | Vanilla JavaScript |
 | Assets | SVG icons, WebP/JPEG responsive images, self-hosted WOFF2 fonts |
-| Hosting target | Nginx on an Ubuntu virtual machine |
-| TLS target | Let's Encrypt |
+| Hosting | Nginx on an Ubuntu 24.04 LTS virtual machine |
+| TLS | Let's Encrypt via Certbot with automatic renewal |
 
 No package installation or production build command is required.
 
@@ -96,6 +96,9 @@ This separation keeps existing customer links unchanged while maintaining Englis
 ├── README.md
 ├── config/
 │   └── site.mjs
+├── deploy/
+│   └── nginx/
+│       └── veligeldi.conf
 ├── docs/
 │   ├── screenshots/
 │   │   ├── home-desktop.jpg
@@ -158,15 +161,15 @@ node scripts/sync-shared-html.mjs --check
 node scripts/validate.mjs
 ```
 
-## Quality checklist
+## Release verification
 
-Before deployment:
+For each production release:
 
 1. Verify all six public routes on desktop and mobile viewports.
 2. Test menu, modal, form validation, WhatsApp URL generation, and map loading.
 3. Confirm every internal link returns a successful response.
 4. Validate structured data and social metadata.
-5. Confirm HTTP-to-HTTPS and `www` canonical redirects.
+5. Confirm HTTP-to-HTTPS redirects and both production hostnames.
 6. Run an accessibility and Lighthouse review against the production server.
 
 ## Documentation
@@ -175,7 +178,9 @@ Implementation details, design constraints, routing behaviour, and deployment re
 
 ## Status
 
-The website implementation and product-claim alignment are complete. Deployment to the company-managed Ubuntu infrastructure and production DNS configuration are the remaining release steps.
+The website is deployed to the company-managed Narbulut Ubuntu infrastructure
+with Nginx, HTTPS, HTTP-to-HTTPS redirection, and automated certificate renewal.
+Production DNS serves both `veligeldi.com` and `www.veligeldi.com`.
 
 ## Maintainer
 
